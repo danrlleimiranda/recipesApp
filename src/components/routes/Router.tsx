@@ -1,7 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
 import Login from '../../pages/Login/Login';
-import Header from '../Header/Header';
 import Meals from '../../pages/Meals/Meals';
 import Drinks from '../../pages/Drinks/Drinks';
 import Profile from '../../pages/Profile/Profile';
