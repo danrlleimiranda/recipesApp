@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Input from '../Input/Input';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import logo from '../../images/logo.svg';
 
 function Header() {
+  const [searchBar, setSearchBar] = useState(true);
+  const showSearchBar = () => {
+    setSearchBar(!searchBar);
+  };
   return (
     <>
       <header>
@@ -15,7 +21,9 @@ function Header() {
           </h2>
         </div>
         <div className="button-container">
-          <button data-testid="search-top-btn">
+
+          <Input data-testid="search-input" hidden={ searchBar } />
+          <button data-testid="search-top-btn" onClick={ showSearchBar }>
             <img src={ searchIcon } alt="" />
           </button>
           <Link to="/profile" data-testid="profile-top-btn">
