@@ -12,6 +12,8 @@ function Profile() {
     localStorage.clear();
     navigate('/');
   };
+
+  const email = localStorage.getItem('user');
   return (
     <div
       style={ {
@@ -26,7 +28,7 @@ function Profile() {
         icon={ profileIcon }
         title="Profile"
       />
-      <p data-testid="profile-email">email@email.com</p>
+      <p data-testid="profile-email">{email}</p>
       <div>
         <Link
           to="/done-recipes"
