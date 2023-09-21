@@ -14,7 +14,7 @@ function Router() {
   // Mentoria: Perguntar sobre o login
   return (
     <Routes>
-      <Route path="/login" element={ <Login /> } />
+      <Route path="/" element={ <Login /> } />
       <Route path="/" element={ <Layout /> }>
         <Route path="/meals" element={ <Meals /> } />
         <Route path="/drinks" element={ <Drinks /> } />
