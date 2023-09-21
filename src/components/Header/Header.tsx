@@ -26,7 +26,19 @@ function Header() {
   const title = whatTitle();
   return (
     <>
-      <header>
+      <header
+      style={
+      {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '0 1rem',
+        width: '100%',
+        border: '1px solid black',
+        marginBottom: '1rem',
+      }
+    }
+    >
         <div className="logo-container">
           <img src={ logo } alt="" />
           <h2>
@@ -51,7 +63,7 @@ function Header() {
       <div>
         <h2 data-testid="page-title">{ title }</h2>
       </div>
-    </>
+    </header>
   );
 }
 export default Header;
