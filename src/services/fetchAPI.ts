@@ -1,5 +1,5 @@
 const fetchAPI = async (path: string, param: string, searchInput: string) => {
-  if (path === 'meals') {
+  if (path === '/meals') {
     switch (param) {
       case 'ingrediente': {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`);
@@ -11,7 +11,7 @@ const fetchAPI = async (path: string, param: string, searchInput: string) => {
         const data = await response.json();
         return data;
       }
-      case 'first-letter': {
+      case 'primeira-letra': {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchInput}`);
         const data = await response.json();
         return data;
@@ -24,7 +24,7 @@ const fetchAPI = async (path: string, param: string, searchInput: string) => {
     }
   }
 
-  if (path === 'drinks') {
+  if (path === '/drinks') {
     switch (param) {
       case 'ingrediente': {
         const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}`);
@@ -36,7 +36,7 @@ const fetchAPI = async (path: string, param: string, searchInput: string) => {
         const data = await response.json();
         return data;
       }
-      case 'first-letter': {
+      case 'primeira-letra': {
         const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchInput}`);
         const data = await response.json();
         return data;
@@ -49,5 +49,7 @@ const fetchAPI = async (path: string, param: string, searchInput: string) => {
     }
   }
 };
+
+console.log(await fetchAPI('/meals', 'nome', 'Arrabiata'));
 
 export default fetchAPI;

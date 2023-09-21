@@ -1,6 +1,6 @@
 function Profile() {
   return (
-    <div>Profile</div>
+    <div data-testid="page-title">Profile</div>
   );
 }
 export default Profile;

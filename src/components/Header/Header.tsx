@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import Input from '../Input/Input';
+import SearchBar from '../SearchBar';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import logo from '../../images/logo.svg';
 
 function Header() {
-  const [searchBar, setSearchBar] = useState(true);
+  const [searchBar, setSearchBar] = useState(false);
   const showSearchBar = () => {
-    setSearchBar(!searchBar);
+    setSearchBar((prev) => !prev);
   };
+
+  const { pathname } = useLocation();
+  const title = pathname === '/meals' ? 'Meals' : 'Drinks';
   return (
     <>
       <header>
@@ -22,17 +25,17 @@ function Header() {
         </div>
         <div className="button-container">
 
-          <Input data-testid="search-input" hidden={ searchBar } />
-          <button data-testid="search-top-btn" onClick={ showSearchBar }>
-            <img src={ searchIcon } alt="" />
-          </button>
           <Link to="/profile" data-testid="profile-top-btn">
             <img src={ profileIcon } alt="" />
           </Link>
+          {searchBar && <SearchBar />}
+          <button data-testid="search-top-btn" onClick={ showSearchBar }>
+            <img src={ searchIcon } alt="" />
+          </button>
         </div>
       </header>
       <div>
-        <h2>Meals</h2>
+        <h2 data-testid="page-title">{ title }</h2>
       </div>
     </>
   );

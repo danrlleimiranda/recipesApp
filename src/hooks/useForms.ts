@@ -14,6 +14,7 @@ function useForms(initialState: any) {
 
   return {
     form,
+    setForm,
     handleChange,
   };
 }

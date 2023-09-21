@@ -1,6 +1,6 @@
 function Drinks() {
   return (
-    <div>Drinks</div>
+    <div data-testid="page-title">Drinks</div>
   );
 }
 export default Drinks;

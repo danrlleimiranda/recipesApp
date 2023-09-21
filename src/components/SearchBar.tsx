@@ -1,68 +1,76 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import Input from './Input/Input';
 import useForms from '../hooks/useForms';
-import { fetchAPI } from '../services/fetchAPI';
+import fetchAPI from '../services/fetchAPI';
+import { Dispatch } from '../types';
+import { fetchData } from '../redux/actions';
 
 export default function SearchBar() {
-  const { form, handleChange } = useForms(
-    {
-      search: '',
-      'search-input': '',
-    },
+  const initialState = {
+    search: 'ingrediente',
+    'search-input': '',
+  };
+  const { form, setForm, handleChange } = useForms(
+    initialState,
   );
-  const [searchResult, setSearchResult] = useState([]);
+
   const { pathname } = useLocation();
+  const dispatch: Dispatch = useDispatch();
 
   const handleSearch = async () => {
-    if (form.search === 'first-letter' && form['search-input'].length > 1) {
-      window.alert('Sua busca deve conter somente 1 (um) caracter');
+    if (form.search === 'primeira-letra' && form['search-input'].length > 1) {
+      window.alert('Your search must have only 1 (one) character');
     } else {
-      const response = await fetchAPI(pathname, form.search, form['search-input']);
-      setSearchResult(response);
+      dispatch(fetchData(pathname, form.search, form['search-input']));
+      setForm(initialState);
     }
   };
   return (
     <div>
-      <label htmlFor="">
-        <input
-          type="text"
-          name="search-input"
-          id=""
-          data-testid="search-input"
-          onChange={ (e) => handleChange(e) }
-        />
-      </label>
-      <label htmlFor="">
-        Ingredient
-        <input
-          type="radio"
-          name="search"
-          value="ingrediente"
-          data-testid="ingredient-search-radio"
-          onChange={ (e) => handleChange(e) }
-        />
-      </label>
-      <label htmlFor="">
-        Name
-        <input
-          type="radio"
-          name="search"
-          value="nome"
-          data-testid="name-search-radio"
-          onChange={ (e) => handleChange(e) }
-        />
-      </label>
-      <label htmlFor="">
-        first letter
-        <input
-          type="radio"
-          name="search"
-          value="primeira-letra"
-          data-testid="first-letter-search-radio"
-          onChange={ (e) => handleChange(e) }
-        />
-      </label>
-      <button data-testid="exec-search-btn" onClick={ handleSearch }>Pesquisar</button>
+      <Input
+        type="text"
+        name="search-input"
+        id=""
+        value={ form['search-input'] }
+        data-testid="search-input"
+        onChange={ (e) => handleChange(e) }
+      />
+
+      <Input
+        label="Ingredient"
+        type="radio"
+        name="search"
+        value="ingrediente"
+        data-testid="ingredient-search-radio"
+        onChange={ (e) => handleChange(e) }
+      />
+
+      <Input
+        label="Name"
+        type="radio"
+        name="search"
+        value="nome"
+        data-testid="name-search-radio"
+        onChange={ (e) => handleChange(e) }
+      />
+      <Input
+        label="First Letter"
+        type="radio"
+        name="search"
+        value="primeira-letra"
+        data-testid="first-letter-search-radio"
+        onChange={ (e) => handleChange(e) }
+      />
+
+      <button
+        data-testid="exec-search-btn"
+        onClick={ () => handleSearch() }
+      >
+        Pesquisar
+
+      </button>
     </div>
   );
 }

@@ -15,7 +15,7 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={ <Login /> } />
-      <Route path="/" element={ <Layout /> }>
+      <Route path="" element={ <Layout /> }>
         <Route path="/meals" element={ <Meals /> } />
         <Route path="/drinks" element={ <Drinks /> } />
         <Route path="profile" element={ <Profile /> } />
