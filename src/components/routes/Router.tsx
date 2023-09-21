@@ -8,20 +8,24 @@ import Drinks from '../../pages/Drinks/Drinks';
 import Profile from '../../pages/Profile/Profile';
 import DoneRecipes from '../../pages/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from '../../pages/FavoriteRecipes/FavoriteRecipes';
+import HeaderLayout from '../../layout/HeaderLayout';
+import FooterLayout from '../../layout/FooterLayout';
 
 function Router() {
-  const [login, setLogin] = useState(false);
-  // Mentoria: Perguntar sobre o login
   return (
     <Routes>
       <Route path="/" element={ <Login /> } />
-      <Route path="/" element={ <Layout /> }>
-        <Route path="/meals" element={ <Meals /> } />
-        <Route path="/drinks" element={ <Drinks /> } />
-        <Route path="profile" element={ <Profile /> } />
-        <Route path="done-recipes" element={ <DoneRecipes /> } />
-        <Route path="favorite-recipes" element={ <FavoriteRecipes /> } />
+
+      <Route path="/" element={ <HeaderLayout /> }>
+        <Route path="/done-recipes" element={ <DoneRecipes /> } />
+        <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
+        <Route path="/" element={ <FooterLayout /> }>
+          <Route path="/meals" element={ <Meals /> } />
+          <Route path="/drinks" element={ <Drinks /> } />
+          <Route path="/profile" element={ <Profile /> } />
+        </Route>
       </Route>
+
     </Routes>
   //
   // <Route path="/meals/:id-da-receita" element={ <Login /> } />
