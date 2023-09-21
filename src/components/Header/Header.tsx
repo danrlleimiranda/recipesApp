@@ -12,7 +12,16 @@ function Header() {
   };
 
   const { pathname } = useLocation();
-  const title = pathname === '/meals' ? 'Meals' : 'Drinks';
+
+  const whatTitle = () => {
+    switch (pathname) {
+      case '/meals': return 'Meals';
+      case '/drinks': return 'Drinks';
+      case '/profile': return 'Profile';
+      default: return 'Recipes';
+    }
+  };
+  const title = whatTitle();
   return (
     <>
       <header>
@@ -24,13 +33,14 @@ function Header() {
           </h2>
         </div>
         <div className="button-container">
+          {pathname !== '/profile' && (
+            <Link to="/profile">
+              <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+            </Link>)}
 
-          <Link to="/profile" data-testid="profile-top-btn">
-            <img src={ profileIcon } alt="" />
-          </Link>
           {searchBar && <SearchBar />}
-          <button data-testid="search-top-btn" onClick={ showSearchBar }>
-            <img src={ searchIcon } alt="" />
+          <button onClick={ showSearchBar }>
+            <img src={ searchIcon } alt="" data-testid="search-top-btn" />
           </button>
         </div>
       </header>
