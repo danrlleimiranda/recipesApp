@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Input from './Input/Input';
 import useForms from '../hooks/useForms';
-import fetchAPI from '../services/fetchAPI';
 import { Dispatch } from '../types';
 import { fetchData } from '../redux/actions';
 
