@@ -18,12 +18,13 @@ export default function SearchBar() {
 
   const { pathname } = useLocation();
   const dispatch: Dispatch = useDispatch();
+  const searchInput = 'search-input';
 
   const handleSearch = async () => {
-    if (form.search === 'primeira-letra' && form['search-input'].length > 1) {
+    if (form.search === 'primeira-letra' && form[searchInput].length > 1) {
       window.alert('Your search must have only 1 (one) character');
     } else {
-      dispatch(fetchData(pathname, form.search, form['search-input']));
+      dispatch(fetchData(pathname, form.search, form[searchInput]));
       setForm(initialState);
     }
   };
