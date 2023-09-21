@@ -1,6 +1,16 @@
 function FavoriteRecipes() {
   return (
-    <div>FavoriteRecipes</div>
+    <div
+      style={ {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+      } }
+    >
+      FavoriteRecipes
+
+    </div>
   );
 }
 export default FavoriteRecipes;
