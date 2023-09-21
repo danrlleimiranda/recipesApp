@@ -1,16 +1,14 @@
 function FavoriteRecipes() {
   return (
-    <div
+    <div data-testid="page-title"
       style={ {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
       } }
-    >
-      FavoriteRecipes
+      >FavoriteRecipes</div>
 
-    </div>
   );
 }
 export default FavoriteRecipes;

@@ -1,6 +1,6 @@
 function DoneRecipes() {
   return (
-    <div>DoneRecipes</div>
+    <div data-testid="page-title">DoneRecipes</div>
   );
 }
 export default DoneRecipes;

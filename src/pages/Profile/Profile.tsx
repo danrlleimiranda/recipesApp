@@ -16,6 +16,7 @@ function Profile() {
   const email = localStorage.getItem('user');
   return (
     <div
+      data-testid="page-title"
       style={ {
         display: 'flex',
         flexDirection: 'column',
