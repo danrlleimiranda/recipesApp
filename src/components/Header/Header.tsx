@@ -18,6 +18,8 @@ function Header() {
       case '/meals': return 'Meals';
       case '/drinks': return 'Drinks';
       case '/profile': return 'Profile';
+      case '/done-recipes': return 'Done Recipes';
+      case '/favorite-recipes': return 'Favorite Recipes';
       default: return 'Recipes';
     }
   };
@@ -39,9 +41,11 @@ function Header() {
             </Link>)}
 
           {searchBar && <SearchBar />}
-          <button onClick={ showSearchBar }>
-            <img src={ searchIcon } alt="" data-testid="search-top-btn" />
-          </button>
+          {(pathname === '/drinks' || pathname === '/meals') && (
+
+            <button onClick={ showSearchBar }>
+              <img src={ searchIcon } alt="" data-testid="search-top-btn" />
+            </button>)}
         </div>
       </header>
       <div>
