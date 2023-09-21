@@ -1,4 +1,4 @@
-export const fetchAPI = async (path: string, param: string, searchInput: string) => {
+const fetchAPI = async (path: string, param: string, searchInput: string) => {
   if (path === 'meals') {
     switch (param) {
       case 'ingrediente': {
@@ -49,3 +49,5 @@ export const fetchAPI = async (path: string, param: string, searchInput: string)
     }
   }
 };
+
+export default fetchAPI;
