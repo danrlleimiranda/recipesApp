@@ -31,7 +31,11 @@ function Login() {
 
   useEffect(() => {
     console.log(isValid(email, password));
-    if (isValid(email, password)) setValidation(false);
+    if (isValid(email, password)) {
+      setValidation(false);
+    } else {
+      setValidation(true);
+    }
   }, [email, password]);
   return (
     <main>

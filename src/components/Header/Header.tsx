@@ -46,17 +46,20 @@ function Header() {
         </h2>
       </div>
       <div className="button-container">
-        {pathname !== '/profile' && (
-          <Link to="/profile">
-            <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
-          </Link>)}
+        <div className="button-container">
+          {pathname !== '/profile' && (
+            <Link to="/profile">
+              <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+            </Link>)}
 
-        {searchBar && <SearchBar />}
-        {(pathname === '/drinks' || pathname === '/meals') && (
+          {searchBar && <SearchBar />}
 
-          <button onClick={ showSearchBar }>
-            <img src={ searchIcon } alt="" data-testid="search-top-btn" />
-          </button>)}
+          {(pathname === '/drinks' || pathname === '/meals') && (
+
+            <button onClick={ showSearchBar }>
+              <img src={ searchIcon } alt="" data-testid="search-top-btn" />
+            </button>)}
+        </div>
       </div>
 
       <div>
