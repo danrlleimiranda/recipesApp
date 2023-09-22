@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom';
 
 function Login() {
   return (
-    <div
-      style={ {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      } }
-    >
-      Login
-      <Link to="/meals">Entrar</Link>
-    </div>
+    <main>
+      <form>
+        <input type="text" data-testid="email-input" name="emailUser" />
+        <input type="text" name="password" data-testid="password-input" />
+        <div>
+          <button data-testid="login-submit-btn">
+            Enter
+            <Link to="/meals" />
+          </button>
+        </div>
+      </form>
+    </main>
   );
 }
 export default Login;
