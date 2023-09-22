@@ -7,6 +7,8 @@ import FavoriteRecipes from '../../pages/FavoriteRecipes/FavoriteRecipes';
 import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';
 import Login from '../../pages/Login/Login';
+import MealDetails from '../../pages/Details/MealDetails';
+import DrinkDetails from '../../pages/Details/DrinkDetails';
 
 function Router() {
   return (
@@ -18,7 +20,9 @@ function Router() {
         <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
         <Route path="/" element={ <FooterLayout /> }>
           <Route path="/meals" element={ <Meals /> } />
+          <Route path="/meals/:id-da-receita" element={ <MealDetails /> } />
           <Route path="/drinks" element={ <Drinks /> } />
+          <Route path="/drinks/:id-da-receita" element={ <DrinkDetails /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
       </Route>
