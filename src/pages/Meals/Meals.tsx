@@ -11,16 +11,12 @@ function Meals() {
   }
   return (
     <div
-      style={ {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      } }
+      className="container"
     >
+
       {
       meals && meals.filter((_, index) => index < 12).map((meal, index) => (
-        <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
+        <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` } className="card">
           <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
           <img
             src={ meal.strMealThumb }

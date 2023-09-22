@@ -9,9 +9,13 @@ function Drinks() {
     navigate(`/drinks/${drinks[0].idDrink}`);
   }
   return (
-    <div data-testid="page-title">
+    <div data-testid="page-title" className="container">
       {drinks && drinks.filter((_, index) => index < 12).map((drink, index) => (
-        <div key={ drink.idDrink } data-testid={ `${index}-recipe-card` }>
+        <div
+          key={ drink.idDrink }
+          data-testid={ `${index}-recipe-card` }
+          className="card"
+        >
           <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
           <img
             src={ drink.strDrinkThumb }
