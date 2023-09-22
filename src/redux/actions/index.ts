@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { DrinkType, MealType } from '../../types';
+import { DrinkType, MealType, User } from '../../types';
 import fetchAPI from '../../services/fetchAPI';
 
 export const FETCH_STARTED = 'FETCH_STARTED';
@@ -20,6 +20,15 @@ const fetchError = (error: any) => ({
     error,
   },
 });
+
+export const loginSucess = (user: User) => (
+  {
+    type: 'LOGIN_SUCCESSFUL',
+    payload: {
+      ...user,
+    },
+  }
+);
 
 export const fetchData = (path: string, param: string, searchInput: string) => {
   return async (dispatch: Dispatch) => {

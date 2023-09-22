@@ -117,4 +117,14 @@ export type DrinkType = {
   dateModified: string | null
 };
 
+export type User = {
+  email: string,
+  password: string,
+};
+
+export type ActionType = {
+  payload: string;
+  type: string;
+};
+
 export type Dispatch = ThunkDispatch<GlobalStateType, null, AnyAction>;

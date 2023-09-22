@@ -1,51 +1,67 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Input from '../../components/Input/Input';
 import useForms from '../../hooks/useForms';
-import { saveLocalStorage } from '../../utils';
+import { loginSucess } from '../../redux/actions';
+import { Dispatch } from '../../types';
+import { isValid, saveLocalStorage } from '../../utils/isValid';
 
 function Login() {
-  const { form, handleChange } = useForms({
-    emailUser: '',
+  const INITAL_STATE = {
+    email: '',
     password: '',
-  });
-
-  const isValid = () => {
-    const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
-    return !!((regexEmail.test(form.emailUser) === false || form.password.length <= 6));
   };
-
-  console.log(form);
-
+  const dispatch: Dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isDisabled, setValidation] = useState(true);
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isValid() === false) {
-      saveLocalStorage('user', { email: form.emailUser });
-      navigate('/meals');
-    }
+    dispatch(loginSucess(form));
+    navigate('/meals');
+    const SAVE_EMAIL = {
+      email,
+    };
+    saveLocalStorage('user', JSON.stringify(SAVE_EMAIL));
   };
+
+  const { handleChange, form } = useForms(INITAL_STATE);
+  const { email, password } = form;
+
+  useEffect(() => {
+    console.log(isValid(email, password));
+    if (isValid(email, password)) {
+      setValidation(false);
+    } else {
+      setValidation(true);
+    }
+  }, [email, password]);
   return (
     <main>
-      <form>
-        <input
-          type="email"
+      <form onSubmit={ (e) => handleSubmit(e) }>
+        <Input
+          type="text"
+          label="email"
+          name="email"
           data-testid="email-input"
-          name="emailUser"
-          onChange={ (e) => handleChange(e) }
-          value={ form.emailUser }
+          onChange={ handleChange }
+          value={ email }
         />
-        <input
-          type="password"
-          name="password"
+        <Input
           data-testid="password-input"
-          onChange={ (e) => handleChange(e) }
-          value={ form.password }
+          name="password"
+          type="password"
+          label="password"
+          value={ password }
+          onChange={ handleChange }
         />
         <div>
           <button
+            className="btn-login"
+            type="submit"
             data-testid="login-submit-btn"
-            disabled={ isValid() }
-            onClick={ (e) => handleClick(e) }
+            disabled={ isDisabled }
           >
             Enter
           </button>
@@ -54,4 +70,5 @@ function Login() {
     </main>
   );
 }
+
 export default Login;
