@@ -4,8 +4,8 @@ export const isValid = (email: string, password: string) => {
 
   const validation1 = validEmail;
   const validation2 = password.length > 6;
-  const validation3 = (validation1 && validation2) && validation1 && validation2;
-  return validation3;
+  const validationAll = (validation1 && validation2) && validation1 && validation2;
+  return validationAll;
 };
 
 export const saveLocalStorage = (key: string, value: any) => {
