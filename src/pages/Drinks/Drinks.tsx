@@ -5,6 +5,9 @@ import { GlobalStateType } from '../../types';
 function Drinks() {
   const drinks = useSelector((state: GlobalStateType) => state.recepiesReducer.drinks);
   const navigate = useNavigate();
+  if (!drinks) {
+    window.alert('Sorry, we haven\'t found any recipes for these filters.');
+  }
   if (drinks && drinks.length === 1) {
     navigate(`/drinks/${drinks[0].idDrink}`);
   }
