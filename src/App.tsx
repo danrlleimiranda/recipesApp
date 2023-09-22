@@ -1,5 +1,4 @@
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Router from './components/routes/Router';
 
