@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { GlobalStateType } from '../../types';
 
 function Drinks() {
   const drinks = useSelector((state: GlobalStateType) => state.recepiesReducer.drinks);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   if (!drinks) {
     window.alert('Sorry, we haven\'t found any recipes for these filters.');
   }
@@ -14,18 +15,24 @@ function Drinks() {
   return (
     <div data-testid="page-title" className="container">
       {drinks && drinks.filter((_, index) => index < 12).map((drink, index) => (
-        <div
+        <Link
+          to={ `${pathname}/${drink.idDrink}` }
           key={ drink.idDrink }
-          data-testid={ `${index}-recipe-card` }
-          className="card"
+
         >
-          <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
-          <img
-            src={ drink.strDrinkThumb }
-            alt={ drink.strDrink }
-            data-testid={ `${index}-card-img` }
-          />
-        </div>
+          <div
+            className="card"
+            data-testid={ `${index}-recipe-card` }
+
+          >
+            <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
+            <img
+              src={ drink.strDrinkThumb }
+              alt={ drink.strDrink }
+              data-testid={ `${index}-card-img` }
+            />
+          </div>
+        </Link>
       ))}
     </div>
   );

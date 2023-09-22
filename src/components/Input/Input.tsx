@@ -7,8 +7,8 @@ type InputProps = {
 function Input({ label = '', type = '', onChange, ...props }: InputProps) {
   return (
     <label htmlFor={ props.id }>
-      {label}
       <input id={ props.id } type={ type } onChange={ onChange } { ...props } />
+      {label}
     </label>
   );
 }

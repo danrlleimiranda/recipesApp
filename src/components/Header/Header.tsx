@@ -25,45 +25,39 @@ function Header() {
   };
   const title = whatTitle();
   return (
-    <header
-      style={
-      {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '0 1rem',
-        width: '100%',
-        border: '1px solid black',
-        marginBottom: '1rem',
-      }
-    }
-    >
-      <div className="logo-container">
-        <img src={ logo } alt="" />
-        <h2>
-          {'RECIPES '}
-          <span>app</span>
-        </h2>
-      </div>
-      <div className="button-container">
-        <div className="button-container">
-          {pathname !== '/profile' && (
-            <Link to="/profile">
-              <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
-            </Link>)}
+    <header>
+      <div className="header">
 
-          {searchBar && <SearchBar />}
-
-          {(pathname === '/drinks' || pathname === '/meals') && (
-
-            <button onClick={ showSearchBar }>
-              <img src={ searchIcon } alt="" data-testid="search-top-btn" />
-            </button>)}
+        <div className="logo-container">
+          <img src={ logo } alt="" />
+          <h2>
+            {'RECIPES '}
+            <span>app</span>
+          </h2>
         </div>
+
+        <div className="button-container">
+          <div className="button-container">
+            {(pathname === '/drinks' || pathname === '/meals') && (
+
+              <button onClick={ showSearchBar }>
+                <img src={ searchIcon } alt="" data-testid="search-top-btn" />
+              </button>)}
+            {pathname !== '/profile' && (
+              <Link to="/profile">
+                <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+              </Link>)}
+
+          </div>
+
+        </div>
+
       </div>
 
-      <div>
-        <h2 data-testid="page-title">{ title }</h2>
+      <h2 data-testid="page-title">{ title }</h2>
+      <div className="searchBar-container">
+
+        {searchBar && <SearchBar />}
       </div>
     </header>
   );

@@ -11,6 +11,7 @@ function Footer() {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '0 1rem',
+        background: 'white',
         width: '100%',
         border: '1px solid black',
         position: 'fixed',
