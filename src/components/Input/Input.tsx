@@ -1,12 +1,14 @@
 type InputProps = {
   label?: string;
+  type?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-function Input({ label = '', ...props }: InputProps) {
+function Input({ label = '', type = '', onChange, ...props }: InputProps) {
   return (
     <label htmlFor={ props.id }>
       {label}
-      <input id={ props.id } type="text" { ...props } />
+      <input id={ props.id } type={ type } onChange={ onChange } { ...props } />
     </label>
   );
 }
