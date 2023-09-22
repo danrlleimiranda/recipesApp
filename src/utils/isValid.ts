@@ -13,7 +13,7 @@ export const isValid = (email: string, password: string) => {
 //   const validEmail = regexEmail.test(email);
 
 //   return !((validEmail || password.length >= 6));
-// };
+// }
 
 export const saveLocalStorage = (key: string, value: any) => {
   localStorage.setItem(key, value);
