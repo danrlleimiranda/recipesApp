@@ -143,7 +143,7 @@ function RecipeDetails() {
         ))}
       </div>
 
-      <button data-testid="start-recipe-btn">Start Recipe</button>
+      <button data-testid="start-recipe-btn">START RECIPE</button>
     </div>
   );
 }

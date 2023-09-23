@@ -30,7 +30,14 @@
   }
 
   .recipe-container button {
+    background-color: yellow;
+    border-radius: 10px;
     bottom: 0;
+    color: white;
+    font-weight: 900;
+    left: 5%;
+    padding: 10px;
     position: fixed;
+    width: 90%;
   }
 }
