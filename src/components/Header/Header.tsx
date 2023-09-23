@@ -38,7 +38,7 @@ function Header() {
       }
     }
     >
-      <div className="logo-container">
+      <div className="logo-container" data-testid="logo">
         <img src={ logo } alt="" />
         <h2>
           {'RECIPES '}
@@ -47,10 +47,9 @@ function Header() {
       </div>
       <div className="button-container">
         <div className="button-container">
-          {pathname !== '/profile' && (
-            <Link to="/profile">
-              <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
-            </Link>)}
+          <Link to="/profile">
+            <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+          </Link>
 
           {searchBar && <SearchBar />}
 
