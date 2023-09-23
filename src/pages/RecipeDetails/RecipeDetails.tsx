@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import fetchDetails from '../../services/fetchDetails';
 import { DrinkType, MealType } from '../../types';
 import fetchAPI from '../../services/fetchAPI';
 import './recipeDetails.css';
+import { saveLocalStorage } from '../../utils/isValid';
+import shareIcon from '../../images/shareIcon.svg';
+import favoriteIcon from '../../images/blackHeartIcon.svg';
 
 function RecipeDetails() {
   const [drinks, setDrinks] = useState<DrinkType[]>([]);
@@ -11,9 +14,22 @@ function RecipeDetails() {
   const [drinksRecomendation, setDrinksRecomendation] = useState<DrinkType[]>([]);
   const [mealsRecomendation, setMealsRecomendation] = useState<MealType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInProgress, setIsInProgress] = useState(false);
   const { pathname } = useLocation();
-
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('inProgressRecipes') && id) {
+      const savedRecipes = JSON.parse(localStorage.getItem('inProgressRecipes') || '{}');
+      if (pathname.includes('drinks') && savedRecipes.drinks && savedRecipes.drinks[id]) {
+        setIsInProgress(true);
+      }
+      if (pathname.includes('meals') && savedRecipes.meals && savedRecipes.meals[id]) {
+        setIsInProgress(true);
+      }
+    }
+  }, [pathname, id]);
 
   const drinkIngredients = drinks.length > 0 ? drinks.map((drink) => {
     return Object.entries(drink).filter((entry) => entry[0]
@@ -76,10 +92,41 @@ function RecipeDetails() {
     fetchData();
   }, [pathname]);
 
+  const handleClick = (recipeId: any) => {
+    const savedRecipes = JSON.parse(localStorage.getItem('inProgressRecipes') || '{}');
+    if (pathname.includes('drinks')) {
+      const inProgressRecipes = {
+        ...savedRecipes,
+        drinks: {
+          [recipeId]: [...drinkIngredients],
+        },
+      };
+      saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      setIsInProgress(true);
+      navigate(`/drinks/${recipeId}/in-progress`);
+    } else {
+      const inProgressRecipes = {
+        ...savedRecipes,
+        meals: {
+          [recipeId]: [...mealIngredients],
+        },
+      };
+      saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      setIsInProgress(true);
+      navigate(`/meals/${recipeId}/in-progress`);
+    }
+  };
+
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div className="recipe-container">
+      <button data-testid="share-btn">
+        <img src={ shareIcon } alt="" />
+      </button>
+      <button data-testid="favorite-btn">
+        <img src={ favoriteIcon } alt="" />
+      </button>
       {drinks.length > 0 ? drinks.map((drink) => (
         <div key={ drink.idDrink } className="recipe-card">
           <img src={ drink.strDrinkThumb } alt="" data-testid="recipe-photo" />
@@ -143,7 +190,22 @@ function RecipeDetails() {
         ))}
       </div>
 
-      <button data-testid="start-recipe-btn">START RECIPE</button>
+      {!isInProgress
+        ? (
+          <button
+            data-testid="start-recipe-btn"
+            onClick={ () => handleClick(id) }
+          >
+            START RECIPE
+
+          </button>) : (
+            <button
+              data-testid="start-recipe-btn"
+              onClick={ () => handleClick(id) }
+            >
+              Continue Recipe
+
+            </button>)}
     </div>
   );
 }

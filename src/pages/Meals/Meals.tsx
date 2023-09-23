@@ -19,7 +19,7 @@ function Meals() {
       setInitialMeal(response.meals.filter((_: any, index: number) => index < 12));
     };
     fetchData();
-  }, []);
+  }, [pathname]);
 
   if (meals && meals.length === 1) {
     navigate(`/meals/${meals[0].idMeal}`);
@@ -32,27 +32,35 @@ function Meals() {
       {
       meals.length === 0 ? initialMeals
         .filter((_, index) => index < 12).map((meal, index) => (
-          <Link to={ `${pathname}/${meal.idMeal}` } key={ meal.idMeal }>
-            <div data-testid={ `${index}-recipe-card` } className="card">
+          <div
+            data-testid={ `${index}-recipe-card` }
+            className="card"
+            key={ meal.idMeal }
+          >
+            <Link to={ `${pathname}/${meal.idMeal}` }>
               <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
               <img
                 src={ meal.strMealThumb }
                 alt={ meal.strMeal }
                 data-testid={ `${index}-card-img` }
               />
-            </div>
-          </Link>
+            </Link>
+          </div>
         )) : meals.filter((_, index) => index < 12).map((meal, index) => (
-          <Link to={ `${pathname}/${meal.idMeal}` } key={ meal.idMeal }>
-            <div data-testid={ `${index}-recipe-card` } className="card">
+          <div
+            data-testid={ `${index}-recipe-card` }
+            className="card"
+            key={ meal.idMeal }
+          >
+            <Link to={ `${pathname}/${meal.idMeal}` }>
               <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
               <img
                 src={ meal.strMealThumb }
                 alt={ meal.strMeal }
                 data-testid={ `${index}-card-img` }
               />
-            </div>
-          </Link>
+            </Link>
+          </div>
       ))
      }
 

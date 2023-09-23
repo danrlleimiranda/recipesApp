@@ -16,7 +16,7 @@ function Drinks() {
       setInitialDrinks(response.drinks.filter((_: any, index: number) => index < 12));
     };
     fetchData();
-  }, []);
+  }, [pathname]);
 
   const navigate = useNavigate();
 
@@ -30,13 +30,15 @@ function Drinks() {
     <div data-testid="page-title" className="container">
       {drinks.length === 0 ? initialDrinks
         .filter((_, index) => index < 13).map((drink, index) => (
-          <Link
-            to={ `${pathname}/${drink.idDrink}` }
+
+          <div
+            className="card"
+            data-testid={ `${index}-recipe-card` }
             key={ drink.idDrink }
           >
-            <div
-              className="card"
-              data-testid={ `${index}-recipe-card` }
+            <Link
+              to={ `${pathname}/${drink.idDrink}` }
+
             >
               <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
               <img
@@ -44,17 +46,19 @@ function Drinks() {
                 alt={ drink.strDrink }
                 data-testid={ `${index}-card-img` }
               />
-            </div>
-          </Link>
+            </Link>
+          </div>
         )) : (drinks
         .filter((_, index) => index < 13).map((drink, index) => (
-          <Link
-            to={ `${pathname}/${drink.idDrink}` }
+
+          <div
+            className="card"
+            data-testid={ `${index}-recipe-card` }
             key={ drink.idDrink }
           >
-            <div
-              className="card"
-              data-testid={ `${index}-recipe-card` }
+            <Link
+              to={ `${pathname}/${drink.idDrink}` }
+
             >
               <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
               <img
@@ -62,8 +66,9 @@ function Drinks() {
                 alt={ drink.strDrink }
                 data-testid={ `${index}-card-img` }
               />
-            </div>
-          </Link>))) }
+            </Link>
+          </div>
+        ))) }
     </div>
   );
 }
