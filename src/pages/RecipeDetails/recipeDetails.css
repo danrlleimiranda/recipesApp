@@ -2,10 +2,13 @@
 
   .carousel {
     display: flex;
+    margin: 30px 10px 100px;
     overflow-x: scroll;
   }
 
   .carousel img {
+    border-radius: 5px;
+    margin-right: 5px;
     width: 200px;
   }
 
@@ -29,7 +32,7 @@
     width: 20rem;
   }
 
-  .recipe-container button {
+  .recipe-container .start-recipe-btn {
     background-color: yellow;
     border-radius: 10px;
     bottom: 0;
@@ -39,5 +42,15 @@
     padding: 10px;
     position: fixed;
     width: 90%;
+  }
+
+  .top-btns {
+    align-items: center;
+    background-color: yellow;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    width: 100%;
   }
 }
