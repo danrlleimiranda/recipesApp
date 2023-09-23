@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
@@ -12,6 +12,12 @@ function Header() {
   };
 
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname !== '/meals' && pathname !== '/drinks') {
+      setSearchBar(false);
+    }
+  }, [pathname]);
 
   const whatTitle = () => {
     switch (pathname) {

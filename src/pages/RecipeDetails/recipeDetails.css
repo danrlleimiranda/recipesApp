@@ -1,0 +1,31 @@
+@media screen and ( max-width : 768px ) and ( max-height : 1024px ) {
+
+  .carousel {
+    display: flex;
+    overflow-x: scroll;
+  }
+
+  .carousel img {
+    width: 200px;
+  }
+
+  .recipe-card {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    justify-content: center;
+    margin: auto;
+    width: 90%;
+  }
+
+  .recipe-card p {
+    text-align: justify;
+  }
+
+  .recipe-card img {
+    border-radius: 10px;
+    width: 20rem;
+  }
+}
