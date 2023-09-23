@@ -19,15 +19,17 @@ function Router() {
         <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
         <Route path="/" element={ <FooterLayout /> }>
           <Route path="/meals" element={ <Meals /> } />
-          <Route
-            path="meals/:id"
-            element={ <RecipeDetails /> }
-          />
-          <Route path="drinks/:id" element={ <RecipeDetails /> } />
+
           <Route path="/drinks" element={ <Drinks /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
+
       </Route>
+      <Route
+        path="meals/:id"
+        element={ <RecipeDetails /> }
+      />
+      <Route path="drinks/:id" element={ <RecipeDetails /> } />
     </Routes>
   //
   // <Route path="/meals/:id-da-receita" element={ <Login /> } />

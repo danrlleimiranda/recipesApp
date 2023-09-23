@@ -79,7 +79,7 @@ function RecipeDetails() {
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
-    <div>
+    <div className="recipe-container">
       {drinks.length > 0 ? drinks.map((drink) => (
         <div key={ drink.idDrink } className="recipe-card">
           <img src={ drink.strDrinkThumb } alt="" data-testid="recipe-photo" />
@@ -142,6 +142,8 @@ function RecipeDetails() {
           </div>
         ))}
       </div>
+
+      <button data-testid="start-recipe-btn">Start Recipe</button>
     </div>
   );
 }

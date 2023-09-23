@@ -28,4 +28,9 @@
     border-radius: 10px;
     width: 20rem;
   }
+
+  .recipe-container button {
+    bottom: 0;
+    position: fixed;
+  }
 }
