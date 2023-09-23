@@ -16,14 +16,11 @@ function RecipeDetails() {
     return Object.entries(drink).filter((entry) => entry[0]
       .includes('strIngredient') && entry[1] !== null && entry[1] !== '');
   }).flat(2).filter((_, index) => index % 2 === 1) : [];
-  console.log(drinkIngredients);
 
   const drinkMeasures = drinks.map((drink) => {
     return Object.entries(drink).filter((entry) => entry[0]
       .includes('strMeasure') && entry[1] !== null && entry[1] !== '');
   }).flat(2).filter((_, index) => index % 2 === 1);
-
-  console.log(drinkMeasures);
 
   const mealIngredients = meals.length > 0 ? meals.map((meal) => {
     return Object.entries(meal).filter((entry) => entry[0]
@@ -68,12 +65,7 @@ function RecipeDetails() {
               <li>{drinkMeasures[index]}</li>
             </ul>
           ))}
-          <p>{drink.strInstructions}</p>
-          { drink.strYoutube && (
-            <video src={ drink.strYoutube }>
-              <track kind="captions" />
-            </video>
-          )}
+          <p data-testid="instructions">{drink.strInstructions}</p>
 
         </div>
       )) : meals.map((meal) => (
@@ -83,19 +75,27 @@ function RecipeDetails() {
           <h2 data-testid="recipe-category">{meal.strCategory}</h2>
           <p>Ingredientes</p>
           { mealIngredients && mealIngredients.map((ingredients, index) => (
-            <ul key={ index }>
-              <li>
-                {ingredients}
-              </li>
-              <li>
-                {mealMeasures[index]}
-              </li>
-
+            <ul key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
+              <li>{ingredients}</li>
+              <li>{mealMeasures[index]}</li>
             </ul>
           ))}
+          <p data-testid="instructions">{meal.strInstructions}</p>
+
+          <iframe
+            width="320"
+            height="300"
+            src={ `${meal.strYoutube.replace('watch?v=', 'embed/')}` }
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+         gyroscope; picture-in-picture; web-share"
+            data-testid="video"
+          />
 
         </div>
+
       ))}
+
     </div>
   );
 }
