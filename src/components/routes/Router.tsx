@@ -9,6 +9,7 @@ import FooterLayout from '../../layout/FooterLayout';
 import Login from '../../pages/Login/Login';
 import MealDetails from '../../pages/Details/MealDetails';
 import DrinkDetails from '../../pages/Details/DrinkDetails';
+import Recipes from '../Recipes/Recipes';
 
 function Router() {
   return (
@@ -19,9 +20,9 @@ function Router() {
         <Route path="/done-recipes" element={ <DoneRecipes /> } />
         <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
         <Route path="/" element={ <FooterLayout /> }>
-          <Route path="/meals" element={ <Meals /> } />
+          <Route path="/meals" element={ <Recipes /> } />
           <Route path="/meals/:id-da-receita" element={ <MealDetails /> } />
-          <Route path="/drinks" element={ <Drinks /> } />
+          <Route path="/drinks" element={ <Recipes /> } />
           <Route path="/drinks/:id-da-receita" element={ <DrinkDetails /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
