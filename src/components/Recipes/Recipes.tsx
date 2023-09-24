@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, Link, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Dispatch, DrinkType, GlobalStateType, MealType } from '../../types';
 import { fetchCategories, fetchData } from '../../redux/actions';
