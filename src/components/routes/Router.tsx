@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Meals from '../../pages/Meals/Meals';
+import Recipes from '../../pages/Recipes/index';
 import Drinks from '../../pages/Drinks/Drinks';
 import Profile from '../../pages/Profile/Profile';
 import DoneRecipes from '../../pages/DoneRecipes/DoneRecipes';
@@ -18,9 +18,9 @@ function Router() {
         <Route path="/done-recipes" element={ <DoneRecipes /> } />
         <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
         <Route path="/" element={ <FooterLayout /> }>
-          <Route path="/meals" element={ <Meals /> } />
+          <Route path="/meals" element={ <Recipes /> } />
 
-          <Route path="/drinks" element={ <Drinks /> } />
+          <Route path="/drinks" element={ <Recipes /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
 
