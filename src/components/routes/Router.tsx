@@ -1,10 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
+import Recipes from '../../pages/Recipes/index';
 import Profile from '../../pages/Profile/Profile';
 import DoneRecipes from '../../pages/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from '../../pages/FavoriteRecipes/FavoriteRecipes';
 import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';
 import Login from '../../pages/Login/Login';
+import RecipeDetails from '../../pages/RecipeDetails/RecipeDetails';
 import MealDetails from '../../pages/Details/MealDetails';
 import DrinkDetails from '../../pages/Details/DrinkDetails';
 import Recipes from '../Recipes/Recipes';
@@ -19,12 +21,16 @@ function Router() {
         <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
         <Route path="/" element={ <FooterLayout /> }>
           <Route path="/meals" element={ <Recipes /> } />
-          <Route path="/meals/:id-da-receita" element={ <MealDetails /> } />
           <Route path="/drinks" element={ <Recipes /> } />
-          <Route path="/drinks/:id-da-receita" element={ <DrinkDetails /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
+
       </Route>
+      <Route
+        path="meals/:id"
+        element={ <RecipeDetails /> }
+      />
+      <Route path="drinks/:id" element={ <RecipeDetails /> } />
     </Routes>
   //
   // <Route path="/meals/:id-da-receita" element={ <Login /> } />
