@@ -128,4 +128,13 @@ export type ActionType = {
   type: string;
 };
 
+export type InProgressType = {
+  drinks: {
+    [key: string]: string[]
+  },
+  meals: {
+    [key: string]: string[]
+  }
+};
+
 export type Dispatch = ThunkDispatch<GlobalStateType, null, AnyAction>;

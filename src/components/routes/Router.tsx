@@ -7,6 +7,7 @@ import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';
 import Login from '../../pages/Login/Login';
 import RecipeDetails from '../../pages/RecipeDetails/RecipeDetails';
+import RecipeInProgress from '../../pages/RecipeInProgress';
 
 function Router() {
   return (
@@ -27,14 +28,11 @@ function Router() {
         path="meals/:id"
         element={ <RecipeDetails /> }
       />
+      <Route path="/meals/:id/in-progress" element={ <RecipeInProgress /> } />
       <Route path="drinks/:id" element={ <RecipeDetails /> } />
+      <Route path="/drinks/:id/in-progress" element={ <RecipeInProgress /> } />
     </Routes>
-  //
-  // <Route path="/meals/:id-da-receita" element={ <Login /> } />
-  // <Route path="/drinks/:id-da-receita" element={ <Login /> } />
-  // <Route path="/meals/:id-da-receita/in-progress" element={ <Login /> } />
-  // <Route path="/drinks/:id-da-receita/in-progress" element={ <Login /> } />
-  //
+
   );
 }
 export default Router;
