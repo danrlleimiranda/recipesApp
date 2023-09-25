@@ -8,6 +8,7 @@ import Login from '../../pages/Login/Login';
 import MealDetails from '../../pages/Details/MealDetails';
 import DrinkDetails from '../../pages/Details/DrinkDetails';
 import Recipes from '../../pages/Recipes/Recipes';
+import RecipeDetails from '../../pages/RecipeDetails/RecipeDetails';
 
 function Router() {
   return (
@@ -24,14 +25,8 @@ function Router() {
           <Route path="/drinks/:id-da-receita" element={ <DrinkDetails /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
-      </Route>
+      </Route> 
     </Routes>
-  //
-  // <Route path="/meals/:id-da-receita" element={ <Login /> } />
-  // <Route path="/drinks/:id-da-receita" element={ <Login /> } />
-  // <Route path="/meals/:id-da-receita/in-progress" element={ <Login /> } />
-  // <Route path="/drinks/:id-da-receita/in-progress" element={ <Login /> } />
-  //
   );
 }
 export default Router;

@@ -28,7 +28,7 @@ export default function SearchBar() {
     }
   };
   return (
-    <div>
+    <div className="searchBar">
       <Input
         type="text"
         name="search-input"
@@ -37,38 +37,40 @@ export default function SearchBar() {
         data-testid="search-input"
         onChange={ (e) => handleChange(e) }
       />
+      <div className="radios">
 
-      <Input
-        label="Ingredient"
-        type="radio"
-        name="search"
-        value="ingrediente"
-        data-testid="ingredient-search-radio"
-        onChange={ (e) => handleChange(e) }
-      />
+        <Input
+          label="Ingredient"
+          type="radio"
+          name="search"
+          value="ingrediente"
+          data-testid="ingredient-search-radio"
+          onChange={ (e) => handleChange(e) }
+        />
 
-      <Input
-        label="Name"
-        type="radio"
-        name="search"
-        value="nome"
-        data-testid="name-search-radio"
-        onChange={ (e) => handleChange(e) }
-      />
-      <Input
-        label="First Letter"
-        type="radio"
-        name="search"
-        value="primeira-letra"
-        data-testid="first-letter-search-radio"
-        onChange={ (e) => handleChange(e) }
-      />
+        <Input
+          label="Name"
+          type="radio"
+          name="search"
+          value="nome"
+          data-testid="name-search-radio"
+          onChange={ (e) => handleChange(e) }
+        />
+        <Input
+          label="First Letter"
+          type="radio"
+          name="search"
+          value="primeira-letra"
+          data-testid="first-letter-search-radio"
+          onChange={ (e) => handleChange(e) }
+        />
+      </div>
 
       <button
         data-testid="exec-search-btn"
         onClick={ () => handleSearch() }
       >
-        Pesquisar
+        Search
 
       </button>
     </div>

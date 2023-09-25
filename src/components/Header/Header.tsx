@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
@@ -13,6 +13,12 @@ function Header() {
 
   const { pathname } = useLocation();
 
+  useEffect(() => {
+    if (pathname !== '/meals' && pathname !== '/drinks') {
+      setSearchBar(false);
+    }
+  }, [pathname]);
+
   const whatTitle = () => {
     switch (pathname) {
       case '/meals': return 'Meals';
@@ -25,44 +31,40 @@ function Header() {
   };
   const title = whatTitle();
   return (
-    <header
-      style={
-      {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '0 1rem',
-        width: '100%',
-        border: '1px solid black',
-        marginBottom: '1rem',
-      }
-    }
-    >
-      <div className="logo-container" data-testid="logo">
-        <img src={ logo } alt="" />
-        <h2>
-          {'RECIPES '}
-          <span>app</span>
-        </h2>
-      </div>
-      <div className="button-container">
-        <div className="button-container">
-          <Link to="/profile">
-            <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
-          </Link>
 
-          {searchBar && <SearchBar />}
+    <header>
+      <div className="header">
 
-          {(pathname === '/drinks' || pathname === '/meals') && (
-
-            <button onClick={ showSearchBar }>
-              <img src={ searchIcon } alt="" data-testid="search-top-btn" />
-            </button>)}
+        <div className="logo-container">
+          <img src={ logo } alt="" />
+          <h2>
+            {'RECIPES '}
+            <span>app</span>
+          </h2>
         </div>
+
+        <div className="button-container">
+          <div className="button-container">
+            {(pathname === '/drinks' || pathname === '/meals') && (
+
+              <button onClick={ showSearchBar }>
+                <img src={ searchIcon } alt="" data-testid="search-top-btn" />
+              </button>)}
+            {pathname !== '/profile' && (
+              <Link to="/profile">
+                <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+              </Link>)}
+
+          </div>
+
+        </div>
+
       </div>
 
-      <div>
-        <h2 data-testid="page-title">{ title }</h2>
+      <h2 data-testid="page-title">{ title }</h2>
+      <div className="searchBar-container">
+
+        {searchBar && <SearchBar />}
       </div>
     </header>
   );

@@ -82,6 +82,7 @@ export type DrinkType = {
   strCategory: string,
   strIBA: string | null,
   strAlcoholic: string,
+  strYoutube: string,
   strGlass: string,
   strInstructions: string
   strInstructionsES: null,
