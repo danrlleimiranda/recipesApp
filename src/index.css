@@ -24,16 +24,97 @@ a {
   text-decoration: none !important;
   color: inherit !important;
 }
-@media screen and (max-width: 340px) and (max-height: 640px) {
+@media screen and (max-width: 768px) and (max-height: 1024px) {
+  * {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+  }
   .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 90%;
+    margin-bottom: 100px;
   }
+
+  
   .card {
     display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
-    width: 80px;
+    width: 30%;
+    font-size: 0.8rem;
   }
+
+  .card img {
+    width: 100%;
   }
-  
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 60px;
+  }
+
+  .header img {
+    margin: 10px;
+  }
+
+  header h2 {
+    text-align: center;
+  }
+
+  .searchBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .searchBar-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  .searchBar button {
+    background-color: purple;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .searchBar input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .searchBar input[type="radio"] {
+    margin-right: 5px;
+  }
+
+  .searchBar lable {
+    margin-left: 30px;
+  }
+  .radios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  }

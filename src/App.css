@@ -1,16 +1,3 @@
-.meals {
-  align-items: center;
-  background: whitesmoke;
-  color: #464646;
-  display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
-  justify-content: center;
-  width: 100%;
-}
-
-
 /* background: #0fa36b; */
 .rocksGlass {
   animation: shake 1s infinite ease;

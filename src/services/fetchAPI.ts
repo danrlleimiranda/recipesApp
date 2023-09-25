@@ -50,6 +50,4 @@ const fetchAPI = async (path: string, param: string, searchInput: string) => {
   }
 };
 
-console.log(await fetchAPI('/meals', 'nome', 'Arrabiata'));
-
 export default fetchAPI;
