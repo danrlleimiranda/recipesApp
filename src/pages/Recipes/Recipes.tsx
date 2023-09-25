@@ -23,7 +23,6 @@ function Recipes() {
   const categories = useSelector((state: GlobalStateType) => state
     .categoriesReducer[currentPath]);
   const navigate = useNavigate();
-  console.log(categories);
 
   if (!recipes) {
     window.alert('Sorry, we haven\'t found any recipes for these filters.');
@@ -57,7 +56,6 @@ function Recipes() {
     >
       <Categories
         categories={ categories }
-        currentPath={ currentPath }
         pathname={ pathname }
       />
       <RecipesList
