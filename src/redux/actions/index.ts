@@ -29,9 +29,7 @@ const fetchError = (error: any) => ({
 const fetchCategoriesSuccess = (payload: CategoriesType) => {
   return {
     type: FETCH_CATEGORIES_SUCCESS,
-    payload: {
-      ...payload,
-    },
+    payload,
   };
 };
 
@@ -61,13 +59,15 @@ export const fetchData = (path: string, param: string, searchInput: string) => {
 };
 
 export const fetchCategories = (path: string) => {
+  console.log('fetchCategories', path);
   return async (dispatch: Dispatch) => {
     dispatch(fetchStarted());
     try {
       const data = await getCategories(path);
+      console.log(data);
       dispatch(fetchCategoriesSuccess(path === '/meals'
-        ? { meals: data }
-        : { drinks: data }));
+        ? { ...data }
+        : { ...data }));
     } catch (error: any) {
       dispatch(fetchError(error));
     }

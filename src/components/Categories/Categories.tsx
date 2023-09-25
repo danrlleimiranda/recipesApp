@@ -12,7 +12,7 @@ function Categories({ pathname, categories, currentPath }: CategoriesProps) {
   const dispatch: Dispatch = useDispatch();
   return (
     <div>
-      {categories && categories[currentPath]
+      {categories && categories
         .filter((_: any, index: number) => index < 5)
         .map((category: CategoryType) => (
           <button

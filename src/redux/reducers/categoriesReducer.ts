@@ -17,7 +17,7 @@ export const categoriesReducer = (
 ) => {
   switch (action.type) {
     case FETCH_CATEGORIES_SUCCESS: {
-      return { ...state, ...action.payload };
+      return { ...action.payload };
     }
     default:
       return state;

@@ -23,6 +23,7 @@ function Recipes() {
   const categories = useSelector((state: GlobalStateType) => state
     .categoriesReducer[currentPath]);
   const navigate = useNavigate();
+  console.log(categories);
 
   if (!recipes) {
     window.alert('Sorry, we haven\'t found any recipes for these filters.');
@@ -39,7 +40,7 @@ function Recipes() {
     dispatch(fetchData(pathname, '', ''));
     dispatch(fetchCategories(pathname));
     setLoading(false);
-  }, [pathname]);
+  }, [pathname, dispatch]);
 
   if (loading) return <p>Loading...</p>;
 
