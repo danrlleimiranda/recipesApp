@@ -7,7 +7,7 @@ import FooterLayout from '../../layout/FooterLayout';
 import Login from '../../pages/Login/Login';
 import MealDetails from '../../pages/Details/MealDetails';
 import DrinkDetails from '../../pages/Details/DrinkDetails';
-import Recipes from '../Recipes/Recipes';
+import Recipes from '../../pages/Recipes/Recipes';
 
 function Router() {
   return (

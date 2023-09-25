@@ -29,7 +29,9 @@ const fetchError = (error: any) => ({
 const fetchCategoriesSuccess = (payload: CategoriesType) => {
   return {
     type: FETCH_CATEGORIES_SUCCESS,
-    payload,
+    payload: {
+      ...payload,
+    },
   };
 };
 
