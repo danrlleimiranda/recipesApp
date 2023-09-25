@@ -132,7 +132,7 @@ export default function RecipeInProgress() {
             <ul className="checkboxes">
               {(id && inProgress.meals[id]) && inProgress.meals[id]
                 .map((ingredient: string, index: number) => (
-                  <li key={ index }>
+                  <li key={ index } data-testid={ `${index}-ingredient-step` }>
 
                     <label
                       htmlFor={ ingredient }
@@ -170,7 +170,7 @@ export default function RecipeInProgress() {
 
               {(id && inProgress.drinks[id])
             && inProgress.drinks[id].map((ingredient: string, index: number) => (
-              <li key={ index }>
+              <li key={ index } data-testid={ `${index}-ingredient-step` }>
                 <label
                   htmlFor={ ingredient }
                   data-testid={ `${index}-ingredient-step` }
