@@ -13,15 +13,6 @@ function Recipes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!meals) {
-      window.alert('Sorry, we haven\'t found any recipes for these filters.');
-    }
-    if (!drinks) {
-      window.alert('Sorry, we haven\'t found any recipes for these filters.');
-    }
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
       if (pathname.includes('meals')) {
         const response = await fetchAPI(pathname, '', '');
@@ -55,7 +46,10 @@ function Recipes() {
               className="card"
               key={ meal.idMeal }
             >
-              <Link to={ `${pathname}/${meal.idMeal}` }>
+              <Link
+                to={ `${pathname}/${meal.idMeal}` }
+                data-testid={ `${index}-recipe-card` }
+              >
                 <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
                 <img
                   src={ meal.strMealThumb }
@@ -66,11 +60,13 @@ function Recipes() {
             </div>
           )) : meals.map((meal, index) => (
             <div
-              data-testid={ `${index}-recipe-card` }
               className="card"
               key={ meal.idMeal }
             >
-              <Link to={ `${pathname}/${meal.idMeal}` }>
+              <Link
+                to={ `${pathname}/${meal.idMeal}` }
+                data-testid={ `${index}-recipe-card` }
+              >
                 <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
                 <img
                   src={ meal.strMealThumb }
@@ -82,7 +78,7 @@ function Recipes() {
         ))}
 
       {pathname === '/drinks' && (drinks.length === 0) ? initialDrinks
-        .filter((_, index) => index < 13).map((drink, index) => (
+        .filter((_, index) => index < 12).map((drink, index) => (
 
           <div
             className="card"
@@ -100,7 +96,7 @@ function Recipes() {
               />
             </Link>
           </div>
-        )) : (drinks
+        )) : (drinks.filter((_, index) => index < 12)
         .map((drink, index) => (
 
           <div
