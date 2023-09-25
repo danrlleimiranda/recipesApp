@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { CategoryType,
-  Dispatch, DrinkType, GlobalStateType, MealType } from '../../types';
+import {
+  Dispatch,
+  DrinkType,
+  GlobalStateType,
+  MealType } from '../../types';
 import { fetchCategories, fetchData } from '../../redux/actions';
-import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import Categories from '../../components/Categories/Categories';
 import RecipesList from '../../components/RecipesList/RecipesList';
 

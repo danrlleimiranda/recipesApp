@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { ChangeEvent, useState, MouseEvent } from 'react';
+import { useState, MouseEvent } from 'react';
 import { fetchData, fetchRecipesByCategory } from '../../redux/actions';
 import { CategoryType, Dispatch } from '../../types';
 import Input from '../Input/Input';
