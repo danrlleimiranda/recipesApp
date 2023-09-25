@@ -1,0 +1,39 @@
+@media screen and ( max-width : 768px ) and ( max-height : 1024px ) {
+
+  .checked {
+    text-decoration: line-through;
+  }
+
+  .top-btns {
+    align-items: center;
+    background-color: yellow;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    width: 100%;
+  }
+
+  .recipe-card .ingredientes {
+    align-self: flex-start;
+    border: 1px solid black;
+    border-radius: 10px;
+    justify-self: center;
+    list-style: none;
+    margin-bottom: 50px;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .finish-recipe-btn {
+    background-color: yellow;
+    border-radius: 10px;
+    bottom: 0;
+    color: black;
+    font-weight: 900;
+    left: 5%;
+    padding: 10px;
+    position: fixed;
+    width: 90%;
+  }
+}
