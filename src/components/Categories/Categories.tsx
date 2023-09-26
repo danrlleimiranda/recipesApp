@@ -24,7 +24,6 @@ function Categories({ pathname, categories }: CategoriesProps) {
     setSelectedRadioBtn((event.target as HTMLInputElement).value);
 
     if (selectedRadioBtn === categoryName) {
-      console.log('teste');
       handleClear();
     } else {
       dispatch(fetchRecipesByCategory(pathname, categoryName));
