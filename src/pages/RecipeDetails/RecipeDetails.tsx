@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import fetchDetails from '../../services/fetchDetails';
 import { DrinkType, MealType } from '../../types';
-import fetchAPI from '../../services/fetchAPI';
+import { fetchAPI } from '../../services/fetchAPI';
 import './recipeDetails.css';
 import { saveLocalStorage } from '../../utils/isValid';
 import shareIcon from '../../images/shareIcon.svg';

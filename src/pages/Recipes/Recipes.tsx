@@ -1,9 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Dispatch, DrinkType, GlobalStateType, MealType } from '../../types';
+import {
+  Dispatch,
+  DrinkType,
+  GlobalStateType,
+  MealType } from '../../types';
 import { fetchCategories, fetchData } from '../../redux/actions';
-import RecipeCard from '../RecipeCard/RecipeCard';
+import Categories from '../../components/Categories/Categories';
+import RecipesList from '../../components/RecipesList/RecipesList';
 
 function Recipes() {
   const dispatch: Dispatch = useDispatch();
@@ -16,8 +22,10 @@ function Recipes() {
   };
   const recipes = useSelector((state: GlobalStateType) => state
     .recipesReducer[currentPath]);
+
   const categories = useSelector((state: GlobalStateType) => state
     .categoriesReducer[currentPath]);
+  console.log('categories', categories);
   const navigate = useNavigate();
 
   if (!recipes) {
@@ -35,7 +43,7 @@ function Recipes() {
     dispatch(fetchData(pathname, '', ''));
     dispatch(fetchCategories(pathname));
     setLoading(false);
-  }, [pathname]);
+  }, [pathname, dispatch]);
 
   if (loading) return <p>Loading...</p>;
 
@@ -44,45 +52,21 @@ function Recipes() {
       className="container"
       style={ {
         display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
+        flexDirection: 'column',
         alignItems: 'center',
-        width: '95%',
-        marginBottom: '50px',
+        width: '100%',
+        justifyContent: 'center',
       } }
     >
-      {/* {
-        categories && categories.map((category) => (
-          <button
-            type="button"
-            key={ category.strCategory }
-            data-testid={ `${category.strCategory}-category-filter` }
-            onClick={ () => dispatch(fetchData(pathname, category.strCategory, '')) }
-          >
-            {category.strCategory}
-          </button>
-        ))
-      } */}
-      {
-        recipes && recipes
-          .filter((_, index) => index < 12)
-          .map((recipe, index) => (
-            <Link
-              to={ `${pathname}/${isMealType(recipe)
-                ? (recipe as MealType).idMeal
-                : (recipe as DrinkType).idDrink}` }
-              key={ isMealType(recipe)
-                ? (recipe as MealType).idMeal
-                : (recipe as DrinkType).idDrink }
-            >
-              <RecipeCard
-                recipe={ recipe }
-                index={ index }
-                isMealType={ isMealType }
-              />
-            </Link>
-          ))
-      }
+      <Categories
+        categories={ categories }
+        pathname={ pathname }
+      />
+      <RecipesList
+        recipes={ recipes }
+        pathname={ pathname }
+        isMealType={ isMealType }
+      />
     </div>
   );
 }

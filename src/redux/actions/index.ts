@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { CategoryType, DrinkType, MealType, User } from '../../types';
-import { fetchAPI, getCategories } from '../../services/fetchAPI';
+import { fetchAPI, getCategories, getRecipesByCategory } from '../../services/fetchAPI';
 
 export const FETCH_STARTED = 'FETCH_STARTED';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
@@ -46,6 +46,7 @@ export const fetchData = (path: string, param: string, searchInput: string) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchStarted());
     try {
+      console.log('fetchData', path, param, searchInput);
       const data = await fetchAPI(path, param, searchInput);
       // if (data.length === 0) {
       //   window.alert('Sorry, we haven\'t found any recipes for these filters.');
@@ -57,15 +58,31 @@ export const fetchData = (path: string, param: string, searchInput: string) => {
     }
   };
 };
+const cleanAllOption: CategoryType = {
+  strCategory: 'Clean All',
+};
 
 export const fetchCategories = (path: string) => {
+  console.log('fetchCategories', path);
   return async (dispatch: Dispatch) => {
     dispatch(fetchStarted());
     try {
       const data = await getCategories(path);
       dispatch(fetchCategoriesSuccess(path === '/meals'
-        ? { meals: data }
-        : { drinks: data }));
+        ? { ...data, cleanAllOption }
+        : { ...data, cleanAllOption }));
+    } catch (error: any) {
+      dispatch(fetchError(error));
+    }
+  };
+};
+
+export const fetchRecipesByCategory = (path: string, category: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(fetchStarted());
+    try {
+      const data = await getRecipesByCategory(path, category);
+      dispatch(fetchSuccess(data));
     } catch (error: any) {
       dispatch(fetchError(error));
     }

@@ -1,14 +1,22 @@
+import style from './Input.module.css';
+
 type InputProps = {
   label?: string;
-  type?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  labelStyle?: React.CSSProperties;
+  labelClassName?: string;
+  inputStyle?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-function Input({ label = '', type = '', onChange, ...props }: InputProps) {
+function Input({ label = '',
+  labelStyle = {},
+  labelClassName = '',
+  inputStyle = '',
+  ...props
+}: InputProps) {
   return (
-    <label htmlFor={ props.id }>
-      <input id={ props.id } type={ type } onChange={ onChange } { ...props } />
+    <label htmlFor={ props.id } style={ labelStyle } className={ style[labelClassName] }>
       {label}
+      <input id={ props.id } className={ style[inputStyle] } { ...props } />
     </label>
   );
 }

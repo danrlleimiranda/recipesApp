@@ -13,6 +13,7 @@ export type GlobalStateType = {
 };
 
 export type CategoryType = {
+  [key: string]: string,
   strCategory: string,
 };
 
