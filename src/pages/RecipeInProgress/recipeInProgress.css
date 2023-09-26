@@ -1,7 +1,12 @@
 @media screen and ( max-width : 768px ) and ( max-height : 1024px ) {
 
   .checked {
-    text-decoration: line-through;
+    color: green;
+    text-decoration: line-through solid black;
+  }
+
+  ul li {
+    list-style: none;
   }
 
   .top-btns {

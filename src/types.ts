@@ -8,6 +8,7 @@ export type GlobalStateType = {
 };
 
 export type MealType = {
+  [key: string]: string | null | undefined,
   idMeal: string,
   strMeal: string,
   strDrinkAlternate: string | null,

@@ -34,9 +34,10 @@ function RecipeDetails() {
     setIsInProgress(progress);
     setIsFavorite(favorite);
   }, [pathname, id]);
-  const drinkIngredients = drinks.length > 0 ? drinks.map((drink) => Object.entries(drink)
-    .filter((entry) => entry[0]
-      .includes('strIngredient') && entry[1] !== null && entry[1] !== ''))
+  const drinkIngredients = (drinks && drinks.length > 0) ? drinks
+    .map((drink) => Object.entries(drink)
+      .filter((entry) => entry[0]
+        .includes('strIngredient') && entry[1] !== null && entry[1] !== ''))
     .flat(2).filter((_, index) => index % 2 === 1) : [];
   const drinkMeasures = drinks.map((drink) => {
     return Object.entries(drink).filter((entry) => entry[0]
@@ -87,28 +88,27 @@ function RecipeDetails() {
     fetchData();
   }, [pathname]);
   const handleClick = (recipeId: any) => {
-    const savedRecipes = JSON.parse(localStorage.getItem('inProgressRecipes') || '{}');
-    if (pathname.includes('drinks')) {
-      const inProgressRecipes = {
-        ...savedRecipes,
-        drinks: {
-          [recipeId]: [...drinkIngredients],
-        },
-      };
-      saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
-      setIsInProgress(true);
-      navigate(`/drinks/${recipeId}/in-progress`);
-    } else {
-      const inProgressRecipes = {
-        ...savedRecipes,
-        meals: {
-          [recipeId]: [...mealIngredients],
-        },
-      };
-      saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
-      setIsInProgress(true);
-      navigate(`/meals/${recipeId}/in-progress`);
-    }
+    // const savedRecipes = JSON.parse(localStorage.getItem('inProgressRecipes') || '{}');
+    // if (pathname.includes('drinks')) {
+    //   const inProgressRecipes = {
+    //     ...savedRecipes,
+    //     drinks: {
+    //       [recipeId]: [...drinkIngredients],
+    //     },
+    //   };
+    //   saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    //   setIsInProgress(true);
+    //   navigate(`/drinks/${recipeId}/in-progress`);
+    // } else {
+    //   const inProgressRecipes = {
+    //     ...savedRecipes,
+    //     meals: {
+    //       [recipeId]: [...mealIngredients],
+    //     },
+    //   };
+    //   saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    //   setIsInProgress(true);
+    navigate(`/meals/${recipeId}/in-progress`);
   };
   const handleCopy = () => {
     const link = window.location.href;
@@ -131,13 +131,10 @@ function RecipeDetails() {
   };
   const handleFavorite = (recipeId: any) => {
     const savedRecipes = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
-
     const updatedFavoriteRecipes = [...savedRecipes];
     let isRecipeInFavorites = false;
-
     const recipeData: any = pathname.includes('drinks') ? drinks[0] : meals[0];
     const type = pathname.includes('drinks') ? 'drink' : 'meal';
-
     updatedFavoriteRecipes.forEach((recipe: any, index: number) => {
       if (recipe.id === recipeId) {
         updatedFavoriteRecipes.splice(index, 1);
