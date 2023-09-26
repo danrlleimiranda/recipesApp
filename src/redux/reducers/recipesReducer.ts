@@ -12,7 +12,7 @@ const initialState = {
   drinks: [],
 };
 
-export const recepiesReducer = (
+export const recipesReducer = (
   state: InitialStateType = initialState,
   action: AnyAction,
 ) => {
