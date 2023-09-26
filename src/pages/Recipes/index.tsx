@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { DrinkType, GlobalStateType, MealType } from '../../types';
-import fetchAPI from '../../services/fetchAPI';
+import { fetchAPI } from '../../services/fetchAPI';
 
 function Recipes() {
   const meals = useSelector((state: GlobalStateType) => state.recepiesReducer.meals);

@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useState, MouseEvent } from 'react';
 import { fetchData, fetchRecipesByCategory } from '../../redux/actions';
 import { CategoryType, Dispatch } from '../../types';
+import style from './Categories.module.css';
 import Input from '../Input/Input';
 
 type CategoriesProps = {
@@ -24,18 +25,23 @@ function Categories({ pathname, categories }: CategoriesProps) {
 
     if (selectedRadioBtn === categoryName) {
       console.log('teste');
-      dispatch(fetchData(pathname, '', ''));
-      setSelectedRadioBtn('');
+      handleClear();
     } else {
       dispatch(fetchRecipesByCategory(pathname, categoryName));
       setIsSelect(!isSelect);
     }
   };
+  if (categories.length === 0) {
+    return <p>Loading...</p>;
+  }
+  const handleClear = () => {
+    dispatch(fetchData(pathname, '', ''));
+    setSelectedRadioBtn('');
+  };
 
   return (
     <div>
-      {categories && categories
-        .filter((_: any, index: number) => index < 5)
+      {categories && categories.slice(0, 5)
         .map((category: CategoryType) => (
           <Input
             type="radio"
@@ -46,14 +52,23 @@ function Categories({ pathname, categories }: CategoriesProps) {
             key={ category.strCategory }
             label={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
-            labelStyle={ {
-              backgroundColor: 'white',
-              marginLeft: '5px',
-              borderRadius: '5px',
-              border: '1px solid black',
-            } }
+            inputStyle="category"
+            // labelStyle={ {
+            //   backgroundColor: 'white',
+            //   marginLeft: '5px',
+            //   borderRadius: '5px',
+            //   border: '1px solid black',
+            // } }
           />
         ))}
+      <button
+        id="clean-all"
+        data-testid="All-category-filter"
+        onClick={ handleClear }
+      >
+        {' '}
+        Clean All
+      </button>
     </div>
   );
 }

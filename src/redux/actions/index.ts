@@ -58,6 +58,9 @@ export const fetchData = (path: string, param: string, searchInput: string) => {
     }
   };
 };
+const cleanAllOption: CategoryType = {
+  strCategory: 'Clean All',
+};
 
 export const fetchCategories = (path: string) => {
   console.log('fetchCategories', path);
@@ -66,8 +69,8 @@ export const fetchCategories = (path: string) => {
     try {
       const data = await getCategories(path);
       dispatch(fetchCategoriesSuccess(path === '/meals'
-        ? { ...data }
-        : { ...data }));
+        ? { ...data, cleanAllOption }
+        : { ...data, cleanAllOption }));
     } catch (error: any) {
       dispatch(fetchError(error));
     }

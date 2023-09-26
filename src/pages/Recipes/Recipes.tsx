@@ -22,8 +22,10 @@ function Recipes() {
   };
   const recipes = useSelector((state: GlobalStateType) => state
     .recipesReducer[currentPath]);
+
   const categories = useSelector((state: GlobalStateType) => state
     .categoriesReducer[currentPath]);
+  console.log('categories', categories);
   const navigate = useNavigate();
 
   if (!recipes) {
