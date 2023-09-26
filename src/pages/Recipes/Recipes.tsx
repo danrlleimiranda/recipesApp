@@ -25,14 +25,14 @@ function Recipes() {
 
   const categories = useSelector((state: GlobalStateType) => state
     .categoriesReducer[currentPath]);
-  console.log('categories', categories);
   const navigate = useNavigate();
 
   if (!recipes) {
     window.alert('Sorry, we haven\'t found any recipes for these filters.');
   }
+
   useEffect(() => {
-    if (recipes && recipes.length === 1) {
+    if (recipes.length) {
       if ('idMeal' in recipes[0]) {
         navigate(`${pathname}/${recipes[0].idMeal}`);
       } else if ('idDrink' in recipes[0]) {
