@@ -5,8 +5,8 @@ import FavoriteRecipes from '../../pages/FavoriteRecipes/FavoriteRecipes';
 import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';
 import Login from '../../pages/Login/Login';
-import Recipes from '../../pages/Recipes/Recipes';
 import RecipeDetails from '../../pages/RecipeDetails/RecipeDetails';
+import Recipes from '../../pages/Recipes/Recipes';
 
 function Router() {
   return (
