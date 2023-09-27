@@ -26,17 +26,6 @@ export default function RecipeInProgress() {
   const { pathname } = useLocation();
   const route = pathname.includes('meals') ? 'meals' : 'drinks';
   useEffect(() => {
-    if (localStorage.getItem('inProgressRecipes') === null && id) {
-      const inProgressLocal = { [route]: { [id]: form } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressLocal));
-    }
-    const inProgressLocalStorage = localStorage.getItem('inProgressRecipes') || '{}';
-    if (id && inProgressLocalStorage) {
-      const recipesInProgress = !inProgressLocalStorage ? []
-        : JSON.parse(inProgressLocalStorage);
-      setForm(recipesInProgress[route][id]);
-      setInProgress(recipesInProgress);
-    }
     const updatedFavoriteRecipes = JSON
       .parse(localStorage.getItem('favoriteRecipes') || '[]');
 
@@ -47,33 +36,37 @@ export default function RecipeInProgress() {
     }
   }, []);
   useEffect(() => {
-    const fetchData = async () => {
-      if (id) {
-        const response = await fetchDetails(route, id);
-        if (route === 'meals') {
-          setMealRecipe(response.meals);
-          const mealIngredients = response.meals
-            .map((meal: MealType) => Object.entries(meal)
-              .filter((entry) => entry[0]
-                .includes('strIngredient') && entry[1] !== null && entry[1] !== ''))
-            .flat(2).filter((_: any, index: number) => index % 2 === 1);
-          const filteredMealIngredients = mealIngredients
-            .filter((item: any) => item !== null && item !== '');
-          setIngredients(filteredMealIngredients);
-        } else {
-          setDrinkRecipe(response.drinks);
-          const mealIngredients = response.drinks
-            .map((drink: DrinkType) => Object.entries(drink)
-              .filter((entry) => entry[0]
-                .includes('strIngredient') && entry[1] !== null && entry[1] !== ''))
-            .flat(2).filter((_: any, index: number) => index % 2 === 1);
-          const filteredDrinkIngredients = mealIngredients
-            .filter((item: any) => item !== null && item !== '');
-          setIngredients(filteredDrinkIngredients);
-        }
+    const fetchRecipeDetails = async () => {
+      if (!id) return;
+
+      const response = await fetchDetails(route, id);
+      const ingredientKey = 'strIngredient';
+
+      if (route === 'meals') {
+        setMealRecipe(response.meals);
+      } else {
+        setDrinkRecipe(response.drinks);
       }
+
+      const recipeIngredients = response[route === 'meals' ? 'meals' : 'drinks']
+        .map((item: any) => Object.entries(item)
+          .filter(([key, value]) => key
+            .includes(ingredientKey) && value !== null && value !== ''))
+        .flat(2)
+        .filter((_: any, index: number) => index % 2 === 1);
+
+      const inProgressLocalStorage = localStorage.getItem('inProgressRecipes');
+      const recipesInProgress = !inProgressLocalStorage
+        ? { [route]: { [id]: [...recipeIngredients] } }
+        : JSON.parse(inProgressLocalStorage);
+
+      setForm(recipesInProgress[route][id]);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
+      setInProgress(recipesInProgress);
+      setIngredients(recipeIngredients);
     };
-    fetchData();
+
+    fetchRecipeDetails();
   }, [id, pathname, route]);
   const handleCopy = () => {
     const link = new URL(window.location.href);
