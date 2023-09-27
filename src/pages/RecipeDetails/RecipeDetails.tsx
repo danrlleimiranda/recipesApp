@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import fetchDetails from '../../services/fetchDetails';
 import { DrinkType, MealType } from '../../types';
-import fetchAPI from '../../services/fetchAPI';
+import { fetchAPI } from '../../services/fetchAPI';
 import './recipeDetails.css';
 import { saveLocalStorage } from '../../utils/isValid';
 import shareIcon from '../../images/shareIcon.svg';
@@ -88,27 +88,28 @@ function RecipeDetails() {
     fetchData();
   }, [pathname]);
   const handleClick = (recipeId: any) => {
-    // const savedRecipes = JSON.parse(localStorage.getItem('inProgressRecipes') || '{}');
-    // if (pathname.includes('drinks')) {
-    //   const inProgressRecipes = {
-    //     ...savedRecipes,
-    //     drinks: {
-    //       [recipeId]: [...drinkIngredients],
-    //     },
-    //   };
-    //   saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    //   setIsInProgress(true);
-    //   navigate(`/drinks/${recipeId}/in-progress`);
-    // } else {
-    //   const inProgressRecipes = {
-    //     ...savedRecipes,
-    //     meals: {
-    //       [recipeId]: [...mealIngredients],
-    //     },
-    //   };
-    //   saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    //   setIsInProgress(true);
-    navigate(`/meals/${recipeId}/in-progress`);
+    const savedRecipes = JSON.parse(localStorage.getItem('inProgressRecipes') || '{}');
+    if (pathname.includes('drinks')) {
+      const inProgressRecipes = {
+        ...savedRecipes,
+        drinks: {
+          [recipeId]: [...drinkIngredients],
+        },
+      };
+      saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      setIsInProgress(true);
+      navigate(`/drinks/${recipeId}/in-progress`);
+    } else {
+      const inProgressRecipes = {
+        ...savedRecipes,
+        meals: {
+          [recipeId]: [...mealIngredients],
+        },
+      };
+      saveLocalStorage('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      setIsInProgress(true);
+      navigate(`/meals/${recipeId}/in-progress`);
+    }
   };
   const handleCopy = () => {
     const link = window.location.href;

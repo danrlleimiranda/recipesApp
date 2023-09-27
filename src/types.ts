@@ -2,9 +2,19 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
 export type GlobalStateType = {
-  recepiesReducer: {
+  recipesReducer: {
+    [key: string]: MealType[] | DrinkType[],
     meals: MealType[],
-    drinks: DrinkType[], }
+    drinks: DrinkType[],
+  }
+  categoriesReducer: {
+    [key: string]: CategoryType[],
+  }
+};
+
+export type CategoryType = {
+  [key: string]: string,
+  strCategory: string,
 };
 
 export type MealType = {

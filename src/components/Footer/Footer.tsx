@@ -16,6 +16,7 @@ function Footer() {
         border: '1px solid black',
         position: 'fixed',
         bottom: '0',
+
       } }
     >
       <Link data-testid="drinks-bottom-btn" to="/drinks">

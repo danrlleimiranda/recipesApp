@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import Recipes from '../../pages/Recipes/index';
 import Profile from '../../pages/Profile/Profile';
 import DoneRecipes from '../../pages/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from '../../pages/FavoriteRecipes/FavoriteRecipes';
@@ -8,6 +7,7 @@ import FooterLayout from '../../layout/FooterLayout';
 import Login from '../../pages/Login/Login';
 import RecipeDetails from '../../pages/RecipeDetails/RecipeDetails';
 import RecipeInProgress from '../../pages/RecipeInProgress';
+import Recipes from '../../pages/Recipes/Recipes';
 
 function Router() {
   return (
@@ -22,7 +22,6 @@ function Router() {
           <Route path="/drinks" element={ <Recipes /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
-
       </Route>
       <Route
         path="meals/:id"

@@ -8,10 +8,6 @@ import favoriteIcon from '../../images/blackHeartIcon.svg';
 import notFavoriteIcon from '../../images/whiteHeartIcon.svg';
 import './recipeInProgress.css';
 
-type FormType = {
-  [key: string]: boolean
-};
-
 export default function RecipeInProgress() {
   const [inProgress, setInProgress] = useState<InProgressType>({
     drinks: {},
@@ -38,7 +34,6 @@ export default function RecipeInProgress() {
     if (id) {
       const recipesInProgress = !inProgressLocalStorage ? []
         : JSON.parse(inProgressLocalStorage);
-
       setForm(recipesInProgress);
     }
     const fetchData = async () => {
@@ -53,7 +48,6 @@ export default function RecipeInProgress() {
             .flat(2).filter((_: any, index: number) => index % 2 === 1);
           const filteredMealIngredients = mealIngredients
             .filter((item: any) => item !== null && item !== '');
-
           setIngredients(filteredMealIngredients);
         } else {
           setDrinkRecipe(response.drinks);
@@ -71,7 +65,6 @@ export default function RecipeInProgress() {
     };
     fetchData();
   }, [id, pathname, route]);
-
   const handleCopy = () => {
     const link = window.location.href;
     const timer = () => {
@@ -91,7 +84,6 @@ export default function RecipeInProgress() {
       },
     );
   };
-
   const handleFavorite = (recipeId: any) => {
     const savedRecipes = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
 
