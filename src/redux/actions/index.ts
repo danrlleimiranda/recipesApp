@@ -47,6 +47,7 @@ export const fetchData = (path: string, param: string, searchInput: string) => {
     dispatch(fetchStarted());
     try {
       const data = await fetchAPI(path, param, searchInput);
+
       if (data.meals === null || data.drinks === null) {
         throw new Error('Sorry, we haven\'t found any recipes for these filters.');
       }

@@ -75,5 +75,3 @@ const getRecipesByCategory = async (path: string, category: string) => {
 };
 
 export { fetchAPI, getCategories, getRecipesByCategory };
-
-export default fetchAPI;

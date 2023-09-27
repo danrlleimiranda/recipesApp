@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import './recipeDetails.css';
 import fetchDetails from '../../services/fetchDetails';
 import { DrinkType, MealType } from '../../types';
 import { fetchAPI } from '../../services/fetchAPI';
-import './recipeDetails.css';
 import { saveLocalStorage } from '../../utils/isValid';
 import shareIcon from '../../images/shareIcon.svg';
 import notFavoriteIcon from '../../images/whiteHeartIcon.svg';
