@@ -93,6 +93,7 @@ function RecipeDetails() {
       const inProgressRecipes = {
         ...savedRecipes,
         drinks: {
+          ...savedRecipes.drinks,
           [recipeId]: [...drinkIngredients],
         },
       };
@@ -103,6 +104,7 @@ function RecipeDetails() {
       const inProgressRecipes = {
         ...savedRecipes,
         meals: {
+          ...savedRecipes.meals,
           [recipeId]: [...mealIngredients],
         },
       };

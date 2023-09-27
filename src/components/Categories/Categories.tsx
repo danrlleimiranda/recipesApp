@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { useState, MouseEvent } from 'react';
 import { fetchData, fetchRecipesByCategory } from '../../redux/actions';
 import { CategoryType, Dispatch } from '../../types';
-import style from './Categories.module.css';
 import Input from '../Input/Input';
 
 type CategoriesProps = {
@@ -30,7 +29,7 @@ function Categories({ pathname, categories }: CategoriesProps) {
       setIsSelect(!isSelect);
     }
   };
-  if (categories.length === 0) {
+  if (!categories) {
     return <p>Loading...</p>;
   }
   const handleClear = () => {
@@ -52,12 +51,6 @@ function Categories({ pathname, categories }: CategoriesProps) {
             label={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
             inputStyle="category"
-            // labelStyle={ {
-            //   backgroundColor: 'white',
-            //   marginLeft: '5px',
-            //   borderRadius: '5px',
-            //   border: '1px solid black',
-            // } }
           />
         ))}
       <button
