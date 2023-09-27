@@ -46,14 +46,13 @@ export const fetchData = (path: string, param: string, searchInput: string) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchStarted());
     try {
-      console.log('fetchData', path, param, searchInput);
       const data = await fetchAPI(path, param, searchInput);
-      if (data.length === 0) {
-        window.alert('Sorry, we haven\'t found any recipes for these filters.');
+      if (data.meals === null || data.drinks === null) {
+        throw new Error('Sorry, we haven\'t found any recipes for these filters.');
       }
       dispatch(fetchSuccess(data));
     } catch (error: any) {
-      window.alert('Sorry, we haven\'t found any recipes for these filters.');
+      window.alert(error.message);
       dispatch(fetchError(error));
     }
   };

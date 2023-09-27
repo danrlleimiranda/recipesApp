@@ -10,16 +10,7 @@ type RecipesListProps = {
 
 function RecipesList({ recipes, pathname, isMealType }: RecipesListProps) {
   return (
-    <div
-      style={ {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '95%',
-        border: '1px solid black',
-      } }
-    >
+    <div className="container">
       {
         recipes && recipes
           .slice(0, 12)

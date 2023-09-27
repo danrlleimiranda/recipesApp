@@ -29,14 +29,14 @@
 
   .recipe-card img {
     border-radius: 10px;
-    width: 20rem;
+    width: 11rem;
   }
 
   .recipe-container .start-recipe-btn {
     background-color: yellow;
     border-radius: 10px;
     bottom: 0;
-    color: white;
+    color: black;
     font-weight: 900;
     left: 5%;
     padding: 10px;

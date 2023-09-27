@@ -12,19 +12,7 @@ function RecipeCard({ recipe, index, isMealType }: RecipeCardProps) {
         ? (recipe as MealType).idMeal
         : (recipe as DrinkType).idDrink }
       data-testid={ `${index}-recipe-card` }
-      className="card"
-      style={ {
-        flexDirection: 'column',
-        width: '150px',
-        height: '150px',
-        margin: '10px',
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // margin: '10px',
-        // flexWrap: 'wrap',
-
-      } }
+      className="recipe-card"
     >
       <img
         src={
@@ -39,10 +27,10 @@ function RecipeCard({ recipe, index, isMealType }: RecipeCardProps) {
         }
         data-testid={ `${index}-card-img` }
         className="card-img-top"
-        style={ {
-          width: '148px',
-          height: '120px',
-        } }
+        // style={ {
+        //   width: '148px',
+        //   height: '120px',
+        // } }
       />
       <p
         data-testid={ `${index}-card-name` }

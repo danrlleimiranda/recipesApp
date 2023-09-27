@@ -18,6 +18,7 @@ export type CategoryType = {
 };
 
 export type MealType = {
+  [key: string]: string | null | undefined,
   idMeal: string,
   strMeal: string,
   strDrinkAlternate: string | null,
@@ -136,6 +137,15 @@ export type User = {
 export type ActionType = {
   payload: string;
   type: string;
+};
+
+export type InProgressType = {
+  drinks: {
+    [key: string]: string[]
+  },
+  meals: {
+    [key: string]: string[]
+  }
 };
 
 export type Dispatch = ThunkDispatch<GlobalStateType, null, AnyAction>;

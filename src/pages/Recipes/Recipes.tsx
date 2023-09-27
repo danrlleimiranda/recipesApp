@@ -37,13 +37,6 @@ function Recipes() {
   return (
     <div
       className="container"
-      style={ {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
-        justifyContent: 'center',
-      } }
     >
       <Categories
         categories={ categories }
