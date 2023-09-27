@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { useState, MouseEvent } from 'react';
 import { fetchData, fetchRecipesByCategory } from '../../redux/actions';
 import { CategoryType, Dispatch } from '../../types';
-import style from './Categories.module.css';
 import Input from '../Input/Input';
 
 type CategoriesProps = {

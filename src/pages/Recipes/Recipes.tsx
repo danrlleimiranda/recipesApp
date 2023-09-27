@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
   Dispatch,
@@ -25,21 +25,8 @@ function Recipes() {
 
   const categories = useSelector((state: GlobalStateType) => state
     .categoriesReducer[currentPath]);
-  const navigate = useNavigate();
-
-  if (!recipes) {
-    window.alert('Sorry, we haven\'t found any recipes for these filters.');
-  }
 
   useEffect(() => {
-    if (recipes.length) {
-      if ('idMeal' in recipes[0]) {
-        navigate(`${pathname}/${recipes[0].idMeal}`);
-      } else if ('idDrink' in recipes[0]) {
-        navigate(`${pathname}/${recipes[0].idDrink}`);
-      }
-    }
-
     dispatch(fetchData(pathname, '', ''));
     dispatch(fetchCategories(pathname));
     setLoading(false);
