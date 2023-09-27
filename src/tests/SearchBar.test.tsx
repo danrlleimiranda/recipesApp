@@ -8,7 +8,6 @@ const searchTestBtn = 'search-top-btn';
 const searchTestInput = 'search-input';
 const execSearchTestBtn = 'exec-search-btn';
 const nameSearchTestRadio = 'name-search-radio';
-const loading = 'Loading...';
 const notFoundAlert = 'Sorry, we haven\'t found any recipes for these filters.';
 
 describe('Testando a searchbar', () => {
@@ -30,15 +29,12 @@ describe('Testando a searchbar', () => {
     const getExecSearchBtn = screen.getByTestId(execSearchTestBtn);
     await userEvent.click(getExecSearchBtn);
     await waitForElementToBeRemoved(() => screen.getByText('First Letter'));
-    await waitForElementToBeRemoved(() => screen.getByText(loading));
-    const getRecipe = screen.getByTestId('recipe-title');
-    expect(getRecipe).toBeInTheDocument();
+    await screen.findByTestId('recipe-title');
     expect(screen.getByText('Spicy Arrabiata Penne')).toBeInTheDocument();
   });
 
   it('Retorno unico de first letter na rota /meals', async () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/meals'] });
-    await waitForElementToBeRemoved(() => screen.getByText(loading));
     const getSearchButton = screen.getByTestId(searchTestBtn);
     await userEvent.click(getSearchButton);
     const getSearchInput = screen.getByTestId(searchTestInput);
@@ -52,7 +48,6 @@ describe('Testando a searchbar', () => {
 
   it('Retorno unico de erro na rota /meals first letter', async () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/meals'] });
-    await waitForElementToBeRemoved(() => screen.getByText(loading));
     const getSearchButton = screen.getByTestId(searchTestBtn);
     await userEvent.click(getSearchButton);
     const getSearchInput = screen.getByTestId(searchTestInput);
@@ -66,7 +61,6 @@ describe('Testando a searchbar', () => {
 
   it('Retorno unico de erro na rota /meals name', async () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/meals'] });
-    await waitForElementToBeRemoved(() => screen.getByText(loading));
     const getSearchButton = screen.getByTestId(searchTestBtn);
     await userEvent.click(getSearchButton);
     const getSearchInput = screen.getByTestId(searchTestInput);
@@ -78,9 +72,8 @@ describe('Testando a searchbar', () => {
     expect(window.alert(notFoundAlert));
   });
 
-  it('Retorno unico de erro na rota /meals ingedient', async () => {
+  it('Retorno unico de erro na rota /meals ingredient', async () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/meals'] });
-    await waitForElementToBeRemoved(() => screen.getByText(loading));
     const getSearchButton = screen.getByTestId(searchTestBtn);
     await userEvent.click(getSearchButton);
     const getSearchInput = screen.getByTestId(searchTestInput);
@@ -101,7 +94,6 @@ describe('Testando a searchbar', () => {
 
   it('Retorno unico de name na rota /drinks', async () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/drinks'] });
-    await waitForElementToBeRemoved(() => screen.getByText(loading));
     const getSearchButton = screen.getByTestId(searchTestBtn);
     await userEvent.click(getSearchButton);
     const getSearchInput = screen.getByTestId(searchTestInput);
@@ -111,9 +103,7 @@ describe('Testando a searchbar', () => {
     const getExecSearchBtn = screen.getByTestId(execSearchTestBtn);
     await userEvent.click(getExecSearchBtn);
     await waitForElementToBeRemoved(() => screen.getByText('First Letter'));
-    await waitForElementToBeRemoved(() => screen.getByText(loading));
-    const getRecipe = screen.getByTestId('recipe-title');
-    expect(getRecipe).toBeInTheDocument();
+    await screen.findByTestId('recipe-title');
     expect(screen.getByText('Aquamarine')).toBeInTheDocument();
   });
 });
