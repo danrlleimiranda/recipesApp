@@ -33,9 +33,6 @@ export default function SearchBar() {
   };
 
   useEffect(() => {
-    if (!recipes) {
-      window.alert('Sorry, we haven\'t found any recipes for these filters.');
-    }
     if (recipes && recipes.length === 1) {
       if ('idMeal' in recipes[0]) {
         navigate(`${pathname}/${recipes[0].idMeal}`);
