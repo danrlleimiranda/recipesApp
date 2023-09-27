@@ -20,7 +20,6 @@ function Router() {
         <Route path="/" element={ <FooterLayout /> }>
           <Route path="/meals" element={ <Recipes /> } />
           <Route path="/drinks" element={ <Recipes /> } />
-          <Route path="/drinks" element={ <Recipes /> } />
           <Route path="/profile" element={ <Profile /> } />
         </Route>
       </Route>
