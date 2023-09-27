@@ -7,6 +7,7 @@ import { saveLocalStorage } from '../../utils/isValid';
 import favoriteIcon from '../../images/blackHeartIcon.svg';
 import notFavoriteIcon from '../../images/whiteHeartIcon.svg';
 import './recipeInProgress.css';
+import InProgress from '../../components/InProgress/InProgress';
 
 export default function RecipeInProgress() {
   const [inProgress, setInProgress] = useState<
@@ -19,7 +20,6 @@ export default function RecipeInProgress() {
   const [copy, setCopy] = useState(false);
   const [copyError, setCopyError] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favorites, setFavorites] = useState<any[]>();
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [form, setForm] = useState<string[]>(ingredients);
   const { id } = useParams();
@@ -69,7 +69,6 @@ export default function RecipeInProgress() {
             .flat(2).filter((_: any, index: number) => index % 2 === 1);
           const filteredDrinkIngredients = mealIngredients
             .filter((item: any) => item !== null && item !== '');
-
           setIngredients(filteredDrinkIngredients);
         }
       }
@@ -157,102 +156,25 @@ export default function RecipeInProgress() {
         {copyError && <p>Erro ao copiar link!</p>}
         <button
           onClick={ () => handleFavorite(id as string) }
-
         >
           <img
             data-testid="favorite-btn"
             src={ isFavorite
               ? favoriteIcon : notFavoriteIcon }
             alt=""
-
           />
         </button>
       </div>
-      {(id && mealRecipe) && pathname.includes('meals')
-        ? mealRecipe.map((item: MealType) => (
-          <div key={ item.idMeal } className="recipe-card">
-            <h1 data-testid="recipe-title">{item.strMeal}</h1>
-            <img src={ item.strMealThumb } alt="" data-testid="recipe-photo" />
-            <h2 data-testid="recipe-category">{item.strCategory}</h2>
-            <p data-testid="instructions">{item.strInstructions}</p>
-            <div className="ingredientes">
-
-              <h3>Ingredients</h3>
-              <ul className="checkboxes">
-                {(ingredients) && ingredients
-                  .map((ingredient: string, index: number) => (
-                    <li
-                      key={ index }
-                      data-testid={ `${index}-ingredient-step` }
-                      className={ inProgress[route][id] && !inProgress[route][id]
-                        .includes(ingredient) ? 'checked' : '' }
-                    >
-                      <label
-                        htmlFor={ ingredient }
-                        data-testid={ `${index}-ingredient-step` }
-                      >
-                        <input
-                          type="checkbox"
-                          value={ ingredient }
-                          id={ ingredient }
-                          checked={ inProgress[route][id]
-                            && !inProgress[route][id].includes(ingredient) }
-                          name="ingredient"
-                          onChange={ (e) => handleChange(e) }
-                          data-testid={ `${index}-checkbox` }
-                        />
-                        {ingredient}
-                      </label>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </div>
-        )) : drinkRecipe.map((item) => (
-          <div key={ item.idDrink } className="recipe-card">
-            <img src={ item.strDrinkThumb } alt="" data-testid="recipe-photo" />
-            <h1 data-testid="recipe-title">{item.strDrink}</h1>
-            <p data-testid="recipe-category">{item.strAlcoholic}</p>
-            <p data-testid="instructions">{item.strInstructions}</p>
-            <div className="ingredientes">
-              <h3>Ingredients</h3>
-              <ul>
-                {(ingredients && id)
-            && ingredients.map((ingredient: string, index: number) => (
-              <li
-                key={ index }
-                data-testid={ `${index}-ingredient-step` }
-                className={ inProgress[route][id]
-                  && !inProgress[route][id].includes(ingredient) ? 'checked' : '' }
-              >
-                <label
-                  htmlFor={ ingredient }
-                  data-testid={ `${index}-ingredient-step` }
-                >
-                  <input
-                    type="checkbox"
-                    value={ ingredient }
-                    id={ ingredient }
-                    name="ingredient"
-                    checked={ inProgress[route][id]
-                      && !inProgress[route][id].includes(ingredient) }
-                    onChange={ (e) => handleChange(e) }
-                    data-testid={ `${index}-checkbox` }
-                  />
-                  {ingredient}
-                </label>
-              </li>
-            ))}
-              </ul>
-            </div>
-          </div>
-        )) }
-      <button
-        data-testid="finish-recipe-btn"
-        className="finish-recipe-btn"
-      >
-        Finish Recipe
-      </button>
+      <InProgress
+        pathname={ pathname }
+        mealRecipe={ mealRecipe }
+        drinkRecipe={ drinkRecipe }
+        ingredients={ ingredients }
+        handleChange={ handleChange }
+        inProgress={ inProgress }
+        route={ route }
+        id={ id as string }
+      />
     </div>
   );
 }
