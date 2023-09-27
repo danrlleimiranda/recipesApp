@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DrinkType, MealType } from '../../types';
+import { saveLocalStorage } from '../../utils/isValid';
 
 type InProgressProps = {
   pathname: string;
@@ -19,6 +21,39 @@ export default function InProgress({ pathname,
   inProgress,
   route,
   id }: InProgressProps) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes') || '[]');
+    if (pathname.includes('meals')) {
+      const meal = mealRecipe.map((item: MealType) => ({
+        id: item.idMeal,
+        type: 'meal',
+        nationality: item.strArea,
+        category: item.strCategory,
+        alcoholicOrNot: '',
+        name: item.strMeal,
+        image: item.strMealThumb,
+        doneDate: new Date(),
+        tags: item.strTags ? item.strTags.split(',') : [],
+      }));
+      saveLocalStorage('doneRecipes', JSON.stringify([...doneRecipes, ...meal]));
+    } else {
+      const drink = drinkRecipe.map((item: DrinkType) => ({
+        id: item.idDrink,
+        type: 'drink',
+        nationality: '',
+        category: item.strCategory,
+        alcoholicOrNot: item.strAlcoholic,
+        name: item.strDrink,
+        image: item.strDrinkThumb,
+        doneDate: new Date(),
+        tags: item.strTags ? item.strTags.split(',') : [],
+      }));
+      saveLocalStorage('doneRecipes', JSON.stringify([...doneRecipes, ...drink]));
+    }
+
+    navigate('/done-recipes');
+  };
   return (
     <div>
       I
@@ -110,6 +145,7 @@ export default function InProgress({ pathname,
         className="finish-recipe-btn"
         disabled={ inProgress[route][id]
        && inProgress[route][id].length > 0 }
+        onClick={ () => handleClick() }
       >
         Finish Recipe
       </button>
