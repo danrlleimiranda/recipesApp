@@ -1,9 +1,9 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Input from './Input/Input';
 import useForms from '../hooks/useForms';
-import { Dispatch } from '../types';
+import { Dispatch, GlobalStateType } from '../types';
 import { fetchData } from '../redux/actions';
 
 export default function SearchBar() {
@@ -16,10 +16,14 @@ export default function SearchBar() {
   );
 
   const { pathname } = useLocation();
+  const currentPath = pathname.split('/')[1];
   const dispatch: Dispatch = useDispatch();
   const searchInput = 'search-input';
+  const navigate = useNavigate();
+  const recipes = useSelector((state: GlobalStateType) => state
+    .recipesReducer[currentPath]);
 
-  const handleSearch = async () => {
+  const handleSearch = () => {
     if (form.search === 'primeira-letra' && form[searchInput].length > 1) {
       window.alert('Your search must have only 1 (one) character');
     } else {
@@ -27,6 +31,20 @@ export default function SearchBar() {
       setForm(initialState);
     }
   };
+
+  useEffect(() => {
+    if (!recipes) {
+      window.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+    if (recipes && recipes.length === 1) {
+      if ('idMeal' in recipes[0]) {
+        navigate(`${pathname}/${recipes[0].idMeal}`);
+      } else if ('idDrink' in recipes[0]) {
+        navigate(`${pathname}/${recipes[0].idDrink}`);
+      }
+    }
+  }, [recipes]);
+
   return (
     <div className="searchBar">
       <Input

@@ -13,7 +13,7 @@ function RecipesList({ recipes, pathname, isMealType }: RecipesListProps) {
     <div className="container">
       {
         recipes && recipes
-          .filter((_, index) => index < 12)
+          .slice(0, 12)
           .map((recipe, index) => (
             <Link
               to={ `${pathname}/${isMealType(recipe)

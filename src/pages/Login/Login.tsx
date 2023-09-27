@@ -30,7 +30,6 @@ function Login() {
   const { email, password } = form;
 
   useEffect(() => {
-    console.log(isValid(email, password));
     if (isValid(email, password)) {
       setValidation(false);
     } else {

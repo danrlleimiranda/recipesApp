@@ -16,7 +16,7 @@ describe('Testando componente header', () => {
     const getTitle = screen.getByTestId(dataTestTitle);
     expect(getTitle).toBeInTheDocument();
     expect(getTitle).toHaveTextContent('Meals');
-    const getLogo = screen.getByTestId('logo');
+    const getLogo = screen.getByAltText('Logo');
     expect(getLogo).toBeInTheDocument();
     const getSearchInput = screen.getByTestId('search-input');
     const getIngredienteRadio = screen.getByTestId('ingredient-search-radio');

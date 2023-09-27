@@ -36,7 +36,7 @@ function Header() {
       <div className="header">
 
         <div className="logo-container">
-          <img src={ logo } alt="" />
+          <img src={ logo } alt="Logo" />
           <h2>
             {'RECIPES '}
             <span>app</span>
@@ -44,19 +44,13 @@ function Header() {
         </div>
 
         <div className="button-container">
-          <div className="button-container">
-            {(pathname === '/drinks' || pathname === '/meals') && (
-
-              <button onClick={ showSearchBar }>
-                <img src={ searchIcon } alt="" data-testid="search-top-btn" />
-              </button>)}
-            {pathname !== '/profile' && (
-              <Link to="/profile">
-                <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
-              </Link>)}
-
-          </div>
-
+          {(pathname === '/drinks' || pathname === '/meals') && (
+            <button onClick={ showSearchBar }>
+              <img src={ searchIcon } alt="" data-testid="search-top-btn" />
+            </button>)}
+          <Link to="/profile">
+            <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+          </Link>
         </div>
 
       </div>
