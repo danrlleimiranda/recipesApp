@@ -1,95 +1,111 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
-import { FavoriteType } from '../../types';
 
 export default function FavoriteRecipes() {
-  const [favoritesList, setFavoritesList] = useState<FavoriteType[]>([]);
-  const [favorites, setFavorites] = useState<FavoriteType[]>([]);
-  const [copyIndex, setCopyIndex] = useState<number | null>(null);
+  type ListType = {
+    id: string,
+    type: string,
+    nationality: string,
+    category: string,
+    alcoholicOrNot: string,
+    name: string,
+    image: string,
+    doneDate: string,
+    tags: string,
+  };
 
-  useEffect(() => {
-    const storage = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
-    setFavorites(storage);
-    setFavoritesList(storage);
-  }, []);
+  const [listFavorites, setListFavorites] = useState<ListType[]>([]);
+  const [globlalListFavorites, setGlobalListFavorites] = useState<ListType[]>([]);
+  const [copy, setCopy] = useState('');
+  const [clicked, setClicked] = useState<number>();
 
   const handleFavorite = (id: string) => {
-    const updatedFavorites = favoritesList.filter((recipe) => recipe.id !== id);
-    setFavoritesList(updatedFavorites);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
+    const newList = listFavorites.filter((list) => list.id !== id);
+    setListFavorites(newList);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
   };
 
-  const handleShareClick = (id: string, type: string, index: number) => {
-    navigator.clipboard.writeText(`${window.location.origin}/${type}s/${id}`)
-      .then(() => {
-        setCopyIndex(index);
-        setTimeout(() => {
-          setCopyIndex(null);
-        }, 3000);
-      });
+  const handleDrinksFilter = () => {
+    setListFavorites(globlalListFavorites.filter((list) => list.type !== 'meal'));
   };
 
-  const filterByAll = () => {
-    setFavoritesList(favorites);
+  const handleMealsFilter = () => {
+    setListFavorites(globlalListFavorites.filter((list) => list.type === 'meal'));
+  };
+  const handleCopy = (id: string, index: number, type: string) => {
+    navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
+      .then(() => setCopy('Link copied!'))
+      .catch(() => console.log('erro'));
+    setClicked(index);
   };
 
-  const filterByMeal = () => {
-    setFavoritesList(favorites.filter((recipe) => recipe.type === 'meal'));
-  };
-
-  const filterByDrink = () => {
-    setFavoritesList(favorites.filter((recipe) => recipe.type !== 'meal'));
-  };
-
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
+    setGlobalListFavorites(data);
+    setListFavorites(data);
+  }, []);
   return (
-    <>
+    <div>
       <Header />
-      <button data-testid="filter-by-all-btn" onClick={ filterByAll }>
-        All
-      </button>
-      <button data-testid="filter-by-meal-btn" onClick={ filterByMeal }>
-        Meals
-      </button>
-      <button data-testid="filter-by-drink-btn" onClick={ filterByDrink }>
-        Drinks
-      </button>
-      <div>
-        {favoritesList.length > 0 ? (
+
+      <section>
+        <button
+          onClick={ () => setListFavorites(globlalListFavorites) }
+          data-testid="filter-by-all-btn"
+        >
+          All
+        </button>
+        <button
+          onClick={ handleMealsFilter }
+          data-testid="filter-by-meal-btn"
+        >
+          Meals
+        </button>
+        <button
+          onClick={ handleDrinksFilter }
+          data-testid="filter-by-drink-btn"
+        >
+          Drinks
+        </button>
+      </section>
+      <section>
+        { listFavorites.length > 0 ? (
           <>
-            {favoritesList.map((recipe, index) => (
-              <div key={ recipe.id }>
+            { listFavorites.map((list, index) => (
+              <div key={ list.id }>
                 <Link
-                  to={ `/${recipe.type}s/${recipe.id}` }
+                  to={ list.type === 'meal' ? `http://localhost:3000/meals/${list.id}`
+                    : `http://localhost:3000/drinks/${list.id}` }
                 >
                   <img
-                    data-testid={ `${index}-horizontal-image` }
-                    src={ recipe.image }
-                    alt={ recipe.name }
                     style={ { width: '150px' } }
+                    data-testid={ `${index}-horizontal-image` }
+                    src={ list.image }
+                    alt={ list.name }
                   />
                 </Link>
                 <h5
                   data-testid={ `${index}-horizontal-top-text` }
                 >
-                  {recipe.type === 'meal' ? `${recipe.nationality} - ${recipe.category}`
-                    : `${recipe.alcoholicOrNot}`}
+                  { list.type === 'meal' ? `${list.nationality} - ${list.category} `
+                    : `${list.alcoholicOrNot}`}
                 </h5>
                 <Link
-                  to={ `/${recipe.type}s/${recipe.id}` }
+                  to={ list.type === 'meal' ? `http://localhost:3000/meals/${list.id}`
+                    : `http://localhost:3000/drinks/${list.id}` }
                 >
                   <h4
                     data-testid={ `${index}-horizontal-name` }
                   >
-                    {recipe.name}
+                    {list.name}
                   </h4>
                 </Link>
                 <button
                   data-testid={ `btn-Copy${index}` }
-                  onClick={ () => handleShareClick(recipe.id, recipe.type, index) }
+                  onClick={ () => handleCopy(list.id, index, list.type) }
                 >
                   <img
                     data-testid={ `${index}-horizontal-share-btn` }
@@ -97,10 +113,10 @@ export default function FavoriteRecipes() {
                     alt="copiar"
                   />
                 </button>
-                {copyIndex === index && <p>Link copied!</p>}
+                { clicked === index && <p>{copy}</p>}
                 <button
                   data-testid={ `btn-favorite${index}` }
-                  onClick={ () => handleFavorite(recipe.id) }
+                  onClick={ () => handleFavorite(list.id) }
                 >
                   <img
                     data-testid={ `${index}-horizontal-favorite-btn` }
@@ -110,10 +126,8 @@ export default function FavoriteRecipes() {
                 </button>
               </div>
             ))}
-          </>
-        ) : 'Nenhuma receita favorita.'}
-      </div>
-      <Footer />
-    </>
+          </>) : 'Nenhuma receita favorita.'}
+      </section>
+    </div>
   );
 }
