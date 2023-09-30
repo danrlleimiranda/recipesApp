@@ -147,5 +147,14 @@ export type InProgressType = {
     [key: string]: string[]
   }
 };
+export type FavoriteType = {
+  id: string;
+  name: string;
+  category: string;
+  nationality?: string;
+  alcoholicOrNot?: string;
+  image: string;
+  type: string;
+};
 
 export type Dispatch = ThunkDispatch<GlobalStateType, null, AnyAction>;
