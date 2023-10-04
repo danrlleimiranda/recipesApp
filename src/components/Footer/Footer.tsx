@@ -19,11 +19,11 @@ function Footer() {
 
       } }
     >
-      <Link data-testid="drinks-bottom-btn" to="/drinks">
-        <img src={ drinkIcon } alt="Drink Icon" />
+      <Link to="/drinks">
+        <img src={ drinkIcon } alt="Drink Icon" data-testid="drinks-bottom-btn" />
       </Link>
-      <Link data-testid="meals-bottom-btn" to="/meals">
-        <img src={ mealIcon } alt="Meals Icon" />
+      <Link to="/meals">
+        <img src={ mealIcon } alt="Meals Icon" data-testid="meals-bottom-btn" />
       </Link>
     </footer>
   );
