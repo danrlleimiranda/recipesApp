@@ -1,9 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import SearchBar from '../SearchBar';
+import { Link, useLocation } from 'react-router-dom';
+import logo from '../../images/logo.svg';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
-import logo from '../../images/logo.svg';
+import SearchBar from '../SearchBar';
+import style from './header.module.css';
 
 function Header() {
   const [searchBar, setSearchBar] = useState(false);
@@ -33,17 +34,16 @@ function Header() {
   return (
 
     <header>
-      <div className="header">
+      <div className={ style.headerContainer }>
 
-        <div className="logo-container">
+        <div className={ style.logo }>
           <img src={ logo } alt="Logo" />
           <h2>
-            {'RECIPES '}
-            <span>app</span>
+            My Recipes
           </h2>
         </div>
 
-        <div className="button-container">
+        <div className={ style.icons }>
           {(pathname === '/drinks' || pathname === '/meals') && (
             <button onClick={ showSearchBar }>
               <img src={ searchIcon } alt="" data-testid="search-top-btn" />

@@ -1,8 +1,9 @@
+import { MouseEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useState, MouseEvent } from 'react';
 import { fetchData, fetchRecipesByCategory } from '../../redux/actions';
 import { CategoryType, Dispatch } from '../../types';
 import Input from '../Input/Input';
+import style from './Categories.module.css';
 
 type CategoriesProps = {
   pathname: string;
@@ -38,7 +39,7 @@ function Categories({ pathname, categories }: CategoriesProps) {
   };
 
   return (
-    <div>
+    <div className={ style.categories }>
       {categories && categories.slice(0, 5)
         .map((category: CategoryType) => (
           <Input
@@ -50,7 +51,7 @@ function Categories({ pathname, categories }: CategoriesProps) {
             key={ category.strCategory }
             label={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
-            inputStyle="category"
+            inputStyle={ style.category }
           />
         ))}
       <button
